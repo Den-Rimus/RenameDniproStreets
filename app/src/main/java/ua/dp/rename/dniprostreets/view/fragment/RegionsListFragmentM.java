@@ -1,0 +1,95 @@
+package ua.dp.rename.dniprostreets.view.fragment;
+
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+
+import java.util.List;
+
+import butterknife.Bind;
+import ua.dp.rename.dniprostreets.R;
+import ua.dp.rename.dniprostreets.adapter.CityRegionsAdapter;
+import ua.dp.rename.dniprostreets.bundle.RenamedObjectsListBundle;
+import ua.dp.rename.dniprostreets.core.BaseFragmentM;
+import ua.dp.rename.dniprostreets.core.Layout;
+import ua.dp.rename.dniprostreets.entity.CityRegion;
+import ua.dp.rename.dniprostreets.presenter.RegionsListPresenterM;
+import ua.dp.rename.dniprostreets.view.DividerItemDecoration;
+
+@Layout(R.layout.fragment_regions_list)
+public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.View, RegionsListPresenterM>
+        implements RegionsListPresenterM.View {
+
+    @Bind(R.id.recyclerView) RecyclerView recyclerView;
+    @Bind(R.id.progressBar) ProgressBar progressBar;
+    @Bind(R.id.toolbar) Toolbar toolbar;
+
+    private CityRegionsAdapter adapter;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        toolbar.setTitle(R.string.app_name);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+
+        adapter = new CityRegionsAdapter(getActivity());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void afterViewCreated() {
+        super.afterViewCreated();
+        presenter.requestDataSet(false);
+    }
+
+    @Override
+    public void openRenamedObjectsList(RenamedObjectsListBundle args) {
+        getFragmentManager().beginTransaction().replace(R.id.main_container,
+                RenamedObjectsListFragmentM.instantiate(getContext(),
+                        RenamedObjectsListFragmentM.class.getName(), args))
+                .addToBackStack(RenamedObjectsListFragmentM.class.getName())
+                .commit();
+    }
+
+    @Override
+    public void onDataSetObtained(List<CityRegion> dataSet) {
+        progressBar.setVisibility(android.view.View.GONE);
+        adapter.setAll(dataSet);
+        recyclerView.setVisibility(android.view.View.VISIBLE);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.fragment_regions_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_search) {
+            presenter.openGlobalSearch();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override @NonNull
+    public RegionsListPresenterM createPresenter() {
+        return new RegionsListPresenterM();
+    }
+}
