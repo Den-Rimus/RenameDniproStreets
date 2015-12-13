@@ -53,12 +53,11 @@ public class RegionsListPresenterM extends BasePresenter<RegionsListPresenterM.V
 
     @SuppressWarnings("unused")
     public void onEventMainThread(final CityRegionClickedEvent event) {
-        getView().openRenamedObjectsList(new RenamedObjectsListBundle(event.cityRegion));
+        getView().openRenamedObjectsList(new RenamedObjectsListBundle(event.cityRegion.getId()));
     }
 
     public void openGlobalSearch() {
-        getView().openRenamedObjectsList(new RenamedObjectsListBundle("TODO",
-                dataRepo.getAllRenamedObjects()));
+        getView().openRenamedObjectsList(new RenamedObjectsListBundle());
     }
 
     @Override
