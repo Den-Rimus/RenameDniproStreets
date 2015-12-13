@@ -1,7 +1,6 @@
 package ua.dp.rename.dniprostreets.presenter;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
 
@@ -10,6 +9,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import rx.Observable;
+import timber.log.Timber;
 import ua.dp.rename.dniprostreets.core.BasePresenter;
 import ua.dp.rename.dniprostreets.entity.CityRegion;
 import ua.dp.rename.dniprostreets.entity.RenamedObject;
@@ -64,7 +64,7 @@ public class RenamedObjectsListPresenterM extends BasePresenter<RenamedObjectsLi
                     .compose(new MainComposer<>())
                     .subscribe(getView()::applyDataSet,
                             e -> {
-                                Log.e("Subscription", "onQueryTextChange " + e.toString());
+                                Timber.e(e, "Error applying search results!");
                                 getView().showError("Error during search");
                             });
             searchState = SearchState.SEARCH;

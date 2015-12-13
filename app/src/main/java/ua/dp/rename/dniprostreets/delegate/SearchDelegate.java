@@ -11,8 +11,6 @@ import rx.functions.Func1;
 
 public class SearchDelegate<T> {
 
-    private static final String TAG = SearchDelegate.class.getName();
-
     private static final int DEBOUNCE_INTERVAL_LENGTH = 600;
 
     private List<T> searchedDataSet;

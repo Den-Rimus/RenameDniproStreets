@@ -1,7 +1,6 @@
 package ua.dp.rename.dniprostreets.repo;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.innahema.collections.query.queriables.Queryable;
 
@@ -10,13 +9,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import timber.log.Timber;
 import ua.dp.rename.dniprostreets.entity.ApiDataHolder;
 import ua.dp.rename.dniprostreets.entity.CityRegion;
 import ua.dp.rename.dniprostreets.entity.RenamedObject;
 
 public class RenamedObjectsRepo {
-
-    private static final String TAG = RenamedObjectsRepo.class.getName();
 
     private List<Listener> listeners = new ArrayList<>();
     private Map<String, CityRegion> asMap = new HashMap<>();
@@ -83,6 +81,6 @@ public class RenamedObjectsRepo {
     }
 
     private void checkListeners() {
-        if (listeners.isEmpty()) Log.w(TAG, "No attached listeners! Check your setup maybe?");
+        if (listeners.isEmpty()) Timber.w("No attached listeners! Check your setup maybe?");
     }
 }

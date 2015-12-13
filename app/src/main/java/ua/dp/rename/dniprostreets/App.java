@@ -2,6 +2,7 @@ package ua.dp.rename.dniprostreets;
 
 import android.app.Application;
 
+import timber.log.Timber;
 import ua.dp.rename.dniprostreets.di.component.AppComponent;
 import ua.dp.rename.dniprostreets.di.component.DaggerAppComponent;
 import ua.dp.rename.dniprostreets.di.module.ApiModule;
@@ -20,6 +21,10 @@ public class App extends Application {
                 .apiModule(new ApiModule())
                 .renamedObjectsRepoModule(new RenamedObjectsRepoModule())
                 .build();
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
     }
 
     public AppComponent component() {

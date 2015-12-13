@@ -1,13 +1,12 @@
 package ua.dp.rename.dniprostreets.presenter;
 
-import android.util.Log;
-
 import com.hannesdorfmann.mosby.mvp.MvpView;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
+import timber.log.Timber;
 import ua.dp.rename.dniprostreets.api.RenamedObjectsService;
 import ua.dp.rename.dniprostreets.bundle.RenamedObjectsListBundle;
 import ua.dp.rename.dniprostreets.core.BasePresenter;
@@ -38,7 +37,7 @@ public class RegionsListPresenterM extends BasePresenter<RegionsListPresenterM.V
                 .compose(new IoToMainComposer<>())
                 .subscribe(this::dataSetObtained, e -> {
                     getView().showError();
-                    Log.e("akrghcimhrgoiu", "API error", e);
+                    Timber.e(e, "API error");
                 });
     }
 
