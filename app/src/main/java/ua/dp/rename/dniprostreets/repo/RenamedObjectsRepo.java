@@ -6,6 +6,7 @@ import android.util.Log;
 import com.innahema.collections.query.queriables.Queryable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,8 +19,8 @@ public class RenamedObjectsRepo {
     private static final String TAG = RenamedObjectsRepo.class.getName();
 
     private List<Listener> listeners = new ArrayList<>();
-    private Map<String, CityRegion> asMap;
-    private List<CityRegion> asList;
+    private Map<String, CityRegion> asMap = new HashMap<>();
+    private List<CityRegion> asList = new ArrayList<>();
 
     public RenamedObjectsRepo() {
         /* TODO :
@@ -58,12 +59,6 @@ public class RenamedObjectsRepo {
 
         return Queryable.from(superSet).sort(RenamedObject.ALPHABETICAL_COMPARATOR).distinct().toList();
     }
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Essential private methods
-    ///////////////////////////////////////////////////////////////////////////
-
-    //
 
     ///////////////////////////////////////////////////////////////////////////
     // Listener

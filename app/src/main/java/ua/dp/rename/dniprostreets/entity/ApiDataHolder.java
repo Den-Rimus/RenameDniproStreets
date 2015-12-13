@@ -3,7 +3,7 @@ package ua.dp.rename.dniprostreets.entity;
 import com.innahema.collections.query.queriables.Queryable;
 
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +20,7 @@ public class ApiDataHolder {
     private CityRegion r68;
 
     public static Map<String, CityRegion> getRegionsAsMap(List<CityRegion> regions) {
-        final Map<String, CityRegion> asMap = Collections.<String, CityRegion>emptyMap();
+        final Map<String, CityRegion> asMap = new HashMap<>();
         Queryable.from(regions).forEachR(region -> asMap.put(region.getId(), region));
         return asMap;
     }

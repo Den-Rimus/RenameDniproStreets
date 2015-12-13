@@ -11,12 +11,11 @@ import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
 import ua.dp.rename.dniprostreets.api.LowercaseEnumTypeAdapterFactory;
 import ua.dp.rename.dniprostreets.api.RenamedObjectsService;
-import ua.dp.rename.dniprostreets.di.annotation.PerApplication;
 
 @Module
 public class ApiModule {
 
-    @Provides @Singleton @PerApplication
+    @Provides @Singleton
     RenamedObjectsService provideRenamedObjectsService(RestAdapter restAdapter) {
         return restAdapter.create(RenamedObjectsService.class);
     }

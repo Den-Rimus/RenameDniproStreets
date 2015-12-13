@@ -7,7 +7,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import ua.dp.rename.dniprostreets.App;
-import ua.dp.rename.dniprostreets.di.annotation.PerApplication;
 
 @Module
 public class AppModule {
@@ -18,7 +17,7 @@ public class AppModule {
         this.application = application;
     }
 
-    @Provides @Singleton @PerApplication
+    @Provides @Singleton
     Context provideApplicationContext() {
         return application;
     }
