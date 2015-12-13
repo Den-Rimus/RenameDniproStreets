@@ -20,6 +20,10 @@ public abstract class BasePresenter<V extends MvpView> extends MvpNullObjectBase
         eventBus.register(this);
     }
 
+    public void onStart() {
+        //
+    }
+
     @Override
     public void detachView(boolean retainInstance) {
         eventBus.unregister(this);
