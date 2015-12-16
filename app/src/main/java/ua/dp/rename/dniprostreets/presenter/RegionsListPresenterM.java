@@ -1,54 +1,54 @@
 package ua.dp.rename.dniprostreets.presenter;
 
-import android.support.annotation.Nullable;
-
 import com.hannesdorfmann.mosby.mvp.MvpView;
-import com.innahema.collections.query.queriables.Queryable;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import ua.dp.rename.dniprostreets.App;
+import javax.inject.Inject;
+
 import ua.dp.rename.dniprostreets.bundle.RenamedObjectsListBundle;
 import ua.dp.rename.dniprostreets.core.BasePresenter;
-import ua.dp.rename.dniprostreets.entity.ApiDataHolder;
 import ua.dp.rename.dniprostreets.entity.CityRegion;
-import ua.dp.rename.dniprostreets.entity.RenamedObject;
 import ua.dp.rename.dniprostreets.event.CityRegionClickedEvent;
-import ua.dp.rename.dniprostreets.rx.IoToMainComposer;
+import ua.dp.rename.dniprostreets.repo.RenamedObjectsRepo;
 
-public class RegionsListPresenterM extends BasePresenter<RegionsListPresenterM.View> {
+public class RegionsListPresenterM extends BasePresenter<RegionsListPresenterM.View>
+        implements RenamedObjectsRepo.Listener {
 
-    private List<CityRegion> dataSet = new ArrayList<>();
+    @Inject
+    RenamedObjectsRepo dataRepo;
 
-    public void requestDataSet(boolean forceUpdate) {
-        if (forceUpdate || dataSet.isEmpty())
-            App.getApiService().getJson()
-                    .map(ApiDataHolder::getRegionsAsList)
-                    .compose(new IoToMainComposer<>())
-                    .subscribe(this::dataSetObtained);
-        else
-            dataSetObtained(null);
+    @Override
+    public void onStart() {
+        super.onStart();
+        dataRepo.attachListener(this);
+        getView().onDataSetObtained(dataRepo.getRegionsAsList());
+        dataRepo.requestUpdate();
     }
 
-    private void dataSetObtained(@Nullable List<CityRegion> newDataSet) {
-        if (newDataSet == null)
-            getView().onDataSetObtained(dataSet);
-        else
-            getView().onDataSetObtained(newDataSet);
+    @Override
+    public void onDataUpdated() {
+        getView().onDataSetObtained(dataRepo.getRegionsAsList());
+    }
+
+    @Override
+    public void onDataRequestError() {
+        getView().showError();
     }
 
     @SuppressWarnings("unused")
     public void onEventMainThread(final CityRegionClickedEvent event) {
-        getView().openRenamedObjectsList(new RenamedObjectsListBundle(event.cityRegion));
+        getView().openRenamedObjectsList(new RenamedObjectsListBundle(event.cityRegion.getId()));
     }
 
     public void openGlobalSearch() {
-        final List<RenamedObject> superSet = new ArrayList<>();
-        Queryable.from(dataSet).forEachR(region -> superSet.addAll(region.getObjects()));
-        getView().openRenamedObjectsList(new RenamedObjectsListBundle("TODO",
-                Queryable.from(superSet).sort(RenamedObject.ALPHABETICAL_COMPARATOR)
-                        .distinct().toList()));
+        getView().openRenamedObjectsList(new RenamedObjectsListBundle());
+    }
+
+    @Override
+    public void detachView(boolean retainInstance) {
+        dataRepo.detachListener(this);
+        super.detachView(retainInstance);
     }
 
     public interface View extends MvpView {
@@ -56,5 +56,7 @@ public class RegionsListPresenterM extends BasePresenter<RegionsListPresenterM.V
         void openRenamedObjectsList(RenamedObjectsListBundle args);
 
         void onDataSetObtained(List<CityRegion> dataSet);
+
+        void showError();
     }
 }

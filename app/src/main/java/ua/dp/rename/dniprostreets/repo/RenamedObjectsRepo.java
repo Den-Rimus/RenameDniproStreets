@@ -1,42 +1,55 @@
 package ua.dp.rename.dniprostreets.repo;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.innahema.collections.query.queriables.Queryable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import timber.log.Timber;
+import ua.dp.rename.dniprostreets.api.RenamedObjectsService;
 import ua.dp.rename.dniprostreets.entity.ApiDataHolder;
 import ua.dp.rename.dniprostreets.entity.CityRegion;
 import ua.dp.rename.dniprostreets.entity.RenamedObject;
+import ua.dp.rename.dniprostreets.rx.IoToMainComposer;
 
 public class RenamedObjectsRepo {
 
-    private static final String TAG = RenamedObjectsRepo.class.getName();
+    private SnappyRepository db;
+    private RenamedObjectsService apiService;
 
     private List<Listener> listeners = new ArrayList<>();
-    private Map<String, CityRegion> asMap;
-    private List<CityRegion> asList;
+    private Map<String, CityRegion> asMap = new HashMap<>();
+    private List<CityRegion> asList = new ArrayList<>();
 
-    public RenamedObjectsRepo() {
-        /* TODO :
-        *  once persisting implemented, enhance constructor with ability to
-        *  read data from db.
-        *  Constructor parameter should accept db instance then
-        */
+    public RenamedObjectsRepo(SnappyRepository db, RenamedObjectsService apiService) {
+        this.db = db;
+        this.apiService = apiService;
+        asList = this.db.getCityRegions();
+        asMap = ApiDataHolder.getRegionsAsMap(asList);
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // Essential public methods
     ///////////////////////////////////////////////////////////////////////////
 
-    public void setCityData(ApiDataHolder cityData) {
+    public void requestUpdate() {
+        apiService.getJson()
+                .compose(new IoToMainComposer<>())
+                .subscribe(this::dataSetObtained, e -> {
+                    pokeAttachedListenersWithError();
+                    Timber.e(e, "API error");
+                });
+    }
+
+    public void dataSetObtained(ApiDataHolder cityData) {
         asList = cityData.getRegionsAsList();
         asMap = ApiDataHolder.getRegionsAsMap(asList);
-        pokeAttachedListeners();
+        pokeAttachedListenersWithSuccess();
+        db.putCityRegions(asList);
     }
 
     public List<CityRegion> getRegionsAsList() {
@@ -60,12 +73,6 @@ public class RenamedObjectsRepo {
     }
 
     ///////////////////////////////////////////////////////////////////////////
-    // Essential private methods
-    ///////////////////////////////////////////////////////////////////////////
-
-    //
-
-    ///////////////////////////////////////////////////////////////////////////
     // Listener
     ///////////////////////////////////////////////////////////////////////////
 
@@ -80,14 +87,21 @@ public class RenamedObjectsRepo {
     public interface Listener {
 
         void onDataUpdated();
+
+        void onDataRequestError();
     }
 
-    private void pokeAttachedListeners() {
+    private void pokeAttachedListenersWithSuccess() {
         checkListeners();
         Queryable.from(listeners).forEachR(Listener::onDataUpdated);
     }
 
+    private void pokeAttachedListenersWithError() {
+        checkListeners();
+        Queryable.from(listeners).forEachR(Listener::onDataRequestError);
+    }
+
     private void checkListeners() {
-        if (listeners.isEmpty()) Log.w(TAG, "No attached listeners! Check your setup maybe?");
+        if (listeners.isEmpty()) Timber.w("No attached listeners! Check your setup maybe?");
     }
 }

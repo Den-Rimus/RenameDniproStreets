@@ -3,16 +3,22 @@ package ua.dp.rename.dniprostreets.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.esotericsoftware.kryo.DefaultSerializer;
+import com.esotericsoftware.kryo.serializers.CompatibleFieldSerializer;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+@DefaultSerializer(CompatibleFieldSerializer.class)
 public class CityRegion implements Parcelable {
 
     private String id;
     @SerializedName("oldAreaName") private String oldAreaName;
     @SerializedName("newAreaName") private String newAreaName;
     @SerializedName("objects") private List<RenamedObject> objects;
+
+    public CityRegion() {
+    }
 
     public String getOldAreaName() {
         return oldAreaName;

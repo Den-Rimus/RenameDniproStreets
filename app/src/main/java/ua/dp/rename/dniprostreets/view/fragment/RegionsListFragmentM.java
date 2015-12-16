@@ -3,6 +3,7 @@ package ua.dp.rename.dniprostreets.view.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import android.widget.ProgressBar;
 import java.util.List;
 
 import butterknife.Bind;
+import ua.dp.rename.dniprostreets.App;
 import ua.dp.rename.dniprostreets.R;
 import ua.dp.rename.dniprostreets.adapter.CityRegionsAdapter;
 import ua.dp.rename.dniprostreets.bundle.RenamedObjectsListBundle;
@@ -44,6 +46,7 @@ public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.Vi
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((App) getActivity().getApplication()).component().inject(this.presenter);
         toolbar.setTitle(R.string.app_name);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
@@ -51,12 +54,8 @@ public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.Vi
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
         recyclerView.setAdapter(adapter);
-    }
 
-    @Override
-    protected void afterViewCreated() {
-        super.afterViewCreated();
-        presenter.requestDataSet(false);
+        presenter.onStart();
     }
 
     @Override
@@ -70,6 +69,7 @@ public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.Vi
 
     @Override
     public void onDataSetObtained(List<CityRegion> dataSet) {
+        if (dataSet == null || dataSet.isEmpty()) return;
         progressBar.setVisibility(android.view.View.GONE);
         adapter.setAll(dataSet);
         recyclerView.setVisibility(android.view.View.VISIBLE);
@@ -86,6 +86,12 @@ public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.Vi
             presenter.openGlobalSearch();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void showError() {
+        if (getView() != null)
+            Snackbar.make(getView(), "Some error happened", Snackbar.LENGTH_SHORT).show();
     }
 
     @Override @NonNull

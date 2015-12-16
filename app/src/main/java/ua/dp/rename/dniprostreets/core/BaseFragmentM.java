@@ -10,12 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hannesdorfmann.mosby.mvp.MvpFragment;
-import com.hannesdorfmann.mosby.mvp.MvpNullObjectBasePresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
 
 import butterknife.ButterKnife;
 
-public abstract class BaseFragmentM<V extends MvpView, P extends MvpNullObjectBasePresenter<V>>
+public abstract class BaseFragmentM<V extends MvpView, P extends BasePresenter<V>>
         extends MvpFragment<V, P> {
 
     public static final String EXTRA_KEY = "BaseFragment_EXTRA";
@@ -41,10 +40,7 @@ public abstract class BaseFragmentM<V extends MvpView, P extends MvpNullObjectBa
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        afterViewCreated();
     }
-
-    protected void afterViewCreated() { /*  */ }
 
     @Override
     public void onDestroyView() {

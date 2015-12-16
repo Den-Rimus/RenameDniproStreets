@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import rx.Subscription;
+import ua.dp.rename.dniprostreets.App;
 import ua.dp.rename.dniprostreets.R;
 import ua.dp.rename.dniprostreets.adapter.RenamedObjectsAdapter;
 import ua.dp.rename.dniprostreets.bundle.RenamedObjectsListBundle;
@@ -60,20 +62,20 @@ public class RenamedObjectsListFragmentM
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RenamedObjectsListBundle args = (RenamedObjectsListBundle) getArgs();
+        ((App) getActivity().getApplication()).component().inject(this.presenter);
 
-        expandForGlobalSearch = args.isGlobalSearch();
+        expandForGlobalSearch = ((RenamedObjectsListBundle) getArgs()).isGlobalSearch();
 
-        toolbar.setTitle(args.getTitle());
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         adapter = new RenamedObjectsAdapter(getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
         recyclerView.setAdapter(adapter);
-        adapter.setAll(args.getDataSet());
 
         initToolbar(toolbar);
+
+        presenter.onStart();
     }
 
     @Override
@@ -129,12 +131,23 @@ public class RenamedObjectsListFragmentM
     }
 
     @Override
+    public void setTitle(String title) {
+        toolbar.setTitle(title);
+    }
+
+    @Override
+    public void showError(String message) {
+        if (getView() != null)
+            Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void applyDataSet(List<RenamedObject> dataSet) {
         adapter.setAll(dataSet);
     }
 
     @Override @NonNull
     public RenamedObjectsListPresenterM createPresenter() {
-        return new RenamedObjectsListPresenterM(((RenamedObjectsListBundle) getArgs()).getDataSet());
+        return new RenamedObjectsListPresenterM(((RenamedObjectsListBundle) getArgs()).getId());
     }
 }

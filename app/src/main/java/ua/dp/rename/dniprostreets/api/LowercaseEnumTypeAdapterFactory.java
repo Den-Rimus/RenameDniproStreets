@@ -1,7 +1,6 @@
 package ua.dp.rename.dniprostreets.api;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
@@ -15,6 +14,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import timber.log.Timber;
 
 public class LowercaseEnumTypeAdapterFactory implements TypeAdapterFactory {
 
@@ -74,7 +75,7 @@ public class LowercaseEnumTypeAdapterFactory implements TypeAdapterFactory {
             } else {
                 serviceStringVariable = reader.nextString();
                 T t = lowerToEnum.get(serviceStringVariable);
-                if (t == null) Log.i("###", serviceStringVariable + " -> unknown");
+                if (t == null) Timber.i("Undefined type found:" + serviceStringVariable + " -> unknown");
                 return t != null ? t : lowerToEnum.get(fallbackKey);
             }
         }

@@ -1,27 +1,55 @@
 package ua.dp.rename.dniprostreets.presenter;
 
-import android.util.Log;
+import android.support.annotation.Nullable;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rx.Observable;
+import timber.log.Timber;
 import ua.dp.rename.dniprostreets.core.BasePresenter;
+import ua.dp.rename.dniprostreets.entity.CityRegion;
 import ua.dp.rename.dniprostreets.entity.RenamedObject;
+import ua.dp.rename.dniprostreets.repo.RenamedObjectsRepo;
 import ua.dp.rename.dniprostreets.rx.MainComposer;
 
 public class RenamedObjectsListPresenterM extends BasePresenter<RenamedObjectsListPresenterM.View> {
 
+    @Inject
+    RenamedObjectsRepo dataRepo;
+
+    private String id;
     private List<RenamedObject> dataSet;
 
     private SearchState searchState = SearchState.DATASET;
 
-    public RenamedObjectsListPresenterM(List<RenamedObject> dataSet) {
-        this.dataSet = dataSet;
+    public RenamedObjectsListPresenterM(@Nullable String id) {
+        this.id = id;
     }
 
-    public void searchRequested(String query) {
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (id == null) {
+            getView().setTitle("SEARCH_TODO");
+            dataSet = dataRepo.getAllRenamedObjects();
+            getView().applyDataSet(dataSet);
+        } else {
+            CityRegion region = dataRepo.getRegion(id);
+            if (region == null) {
+                getView().showError("Error getting region by ID");
+            } else {
+                dataSet = region.getObjects();
+                getView().applyDataSet(dataSet);
+                getView().setTitle(region.getOldAreaName());
+            }
+        }
+    }
+
+    public void searchRequested(final String query) {
         if (query.isEmpty() && searchState.equals(SearchState.SEARCH)) {
             getView().applyDataSet(dataSet);
             searchState = SearchState.DATASET;
@@ -35,7 +63,10 @@ public class RenamedObjectsListPresenterM extends BasePresenter<RenamedObjectsLi
                     .toList()
                     .compose(new MainComposer<>())
                     .subscribe(getView()::applyDataSet,
-                            e -> Log.e("Subscription", "onQueryTextChange " + e.toString()));
+                            e -> {
+                                Timber.e(e, "Error applying search results!");
+                                getView().showError("Error during search");
+                            });
             searchState = SearchState.SEARCH;
         }
     }
@@ -46,7 +77,11 @@ public class RenamedObjectsListPresenterM extends BasePresenter<RenamedObjectsLi
 
     public interface View extends MvpView {
 
+        void setTitle(String title);
+
         void applyDataSet(List<RenamedObject> dataSet);
+
+        void showError(String message);
     }
 
     public enum SearchState {
