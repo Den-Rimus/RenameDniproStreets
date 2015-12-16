@@ -6,48 +6,34 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import timber.log.Timber;
-import ua.dp.rename.dniprostreets.api.RenamedObjectsService;
 import ua.dp.rename.dniprostreets.bundle.RenamedObjectsListBundle;
 import ua.dp.rename.dniprostreets.core.BasePresenter;
-import ua.dp.rename.dniprostreets.entity.ApiDataHolder;
 import ua.dp.rename.dniprostreets.entity.CityRegion;
 import ua.dp.rename.dniprostreets.event.CityRegionClickedEvent;
 import ua.dp.rename.dniprostreets.repo.RenamedObjectsRepo;
-import ua.dp.rename.dniprostreets.rx.IoToMainComposer;
 
 public class RegionsListPresenterM extends BasePresenter<RegionsListPresenterM.View>
         implements RenamedObjectsRepo.Listener {
 
     @Inject
     RenamedObjectsRepo dataRepo;
-    @Inject
-    RenamedObjectsService apiService;
 
     @Override
     public void onStart() {
         super.onStart();
         dataRepo.attachListener(this);
         getView().onDataSetObtained(dataRepo.getRegionsAsList());
-        requestDataSet();
-    }
-
-    public void requestDataSet() {
-        apiService.getJson()
-                .compose(new IoToMainComposer<>())
-                .subscribe(this::dataSetObtained, e -> {
-                    getView().showError();
-                    Timber.e(e, "API error");
-                });
-    }
-
-    private void dataSetObtained(ApiDataHolder dataHolder) {
-        dataRepo.setCityData(dataHolder);
+        dataRepo.requestUpdate();
     }
 
     @Override
     public void onDataUpdated() {
         getView().onDataSetObtained(dataRepo.getRegionsAsList());
+    }
+
+    @Override
+    public void onDataRequestError() {
+        getView().showError();
     }
 
     @SuppressWarnings("unused")
