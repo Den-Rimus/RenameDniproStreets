@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dnipro Streets</string>
+    <string name="screen_title_search">Загальний пошук</string>
+
+    <string name="region_former_name_caption">Колишній \"%s\"</string>
+
+    <string name="menu_item_search_caption">Пошук</string>
+    <string name="menu_item_search_hint">Пошук</string>
+    <string name="menu_item_about_caption">Про додаток</string>
+    <string name="screen_title_about">Відомості про додаток</string>
+</resources>
