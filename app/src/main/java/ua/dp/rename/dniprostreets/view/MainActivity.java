@@ -17,8 +17,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
+        if (getSupportFragmentManager().findFragmentById(R.id.main_container) == null)
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container,
                 RegionsListFragmentM.instantiate(this, RegionsListFragmentM.class.getName())).commit();
     }
