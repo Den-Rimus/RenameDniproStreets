@@ -23,6 +23,7 @@
 
 
 # <butterknife>
+-keepnames class * { @butterknife.Bind *;}
 -keep class butterknife.** { *; }
 -dontwarn butterknife.internal.**
 -keep class **$$ViewBinder { *; }

@@ -1,6 +1,5 @@
 package ua.dp.rename.dniprostreets.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,7 +12,6 @@ import java.util.Collection;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.BindString;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 import ua.dp.rename.dniprostreets.R;
@@ -22,7 +20,7 @@ import ua.dp.rename.dniprostreets.event.CityRegionClickedEvent;
 
 public class CityRegionsAdapter extends RecyclerView.Adapter<CityRegionsAdapter.ViewHolder> {
 
-    @BindString(R.string.region_former_name_caption) String formerNameCaptionFormat;
+    private String formerNameCaptionFormat;
 
     private List<CityRegion> dataSet;
 
@@ -34,7 +32,7 @@ public class CityRegionsAdapter extends RecyclerView.Adapter<CityRegionsAdapter.
 
     public CityRegionsAdapter(Context context, List<CityRegion> dataSet) {
         this.dataSet = dataSet;
-        ButterKnife.bind(this, (Activity) context);
+        formerNameCaptionFormat = context.getString(R.string.region_former_name_caption);
         itemClickListener = v -> EventBus.getDefault().post(
                 new CityRegionClickedEvent((CityRegion) v.getTag(R.id.recycler_view_item_tag)));
     }

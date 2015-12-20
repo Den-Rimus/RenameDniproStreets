@@ -76,9 +76,6 @@ dependencies {
     compile 'com.hannesdorfmann.mosby:mvp:2.0.0'
     compile 'com.hannesdorfmann.mosby:viewstate:2.0.0'
 
-    compile 'frankiesardo:icepick:3.1.0'
-    provided 'frankiesardo:icepick-processor:3.1.0'
-
     compile 'com.snappydb:snappydb-lib:0.5.2'
     compile 'com.esotericsoftware.kryo:kryo:2.24.0'
 
