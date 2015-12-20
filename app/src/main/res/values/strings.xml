@@ -1,13 +1,18 @@
 <resources>
     <string name="app_name">Dnipro Streets</string>
-    <string name="screen_title_search">Загальний пошук</string>
+    <string name="screen_title_search">Global search</string>
 
-    <string name="region_former_name_caption">Колишній \"%s\"</string>
+    <string name="region_former_name_caption">Former \"%s\"</string>
 
-    <string name="type_caption_street">Вулиця</string>
-    <string name="type_caption_avenue">Проспект</string>
-    <string name="type_caption_lane">Провулок</string>
+    <string name="menu_item_search_caption">Search</string>
+    <string name="menu_item_search_hint">Search</string>
+    <string name="menu_item_about_caption">About</string>
+    <string name="screen_title_about">About this app</string>
 
-    <string name="menu_item_search_caption">Пошук</string>
-    <string name="menu_item_search_hint">Пошук</string>
+    <!-- About screen resources -->
+    <string name="disclaimer">NOTICE! This app has no relation to the very fact of renaming objects whatsoever.\nAuthor is not interested in any opinions about list of renamed objects, the general necessity of renaming and who\'s behind all this.</string>
+    <string name="real_disclaimer">In fact, this app was created as an android development exercise and to get a taste of several new technologies and approaches.</string>
+    <string name="info_owner">This app only uses data from http://rename.dp.ua web-site and presents it in smartphone-friendly way.\nThis app or it\'s author do not collect or process any data about renamed objects thus are not responsible for possible inaccuracies or errors.\nAddress web-site above for additional information.</string>
+    <string name="open_source_caption">This is an open-source app: https://github.com/Den-Rimus/RenameDniproStreets</string>
+    <string name="licence">Licence: https://github.com/Den-Rimus/RenameDniproStreets#licence--Ліцензія</string>
 </resources>

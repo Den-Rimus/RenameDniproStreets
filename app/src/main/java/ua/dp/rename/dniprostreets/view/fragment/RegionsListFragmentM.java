@@ -1,5 +1,6 @@
 package ua.dp.rename.dniprostreets.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,6 +26,7 @@ import ua.dp.rename.dniprostreets.core.BaseFragmentM;
 import ua.dp.rename.dniprostreets.core.Layout;
 import ua.dp.rename.dniprostreets.entity.CityRegion;
 import ua.dp.rename.dniprostreets.presenter.RegionsListPresenterM;
+import ua.dp.rename.dniprostreets.view.AboutActivity;
 import ua.dp.rename.dniprostreets.view.DividerItemDecoration;
 
 @Layout(R.layout.fragment_regions_list)
@@ -82,9 +84,10 @@ public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.Vi
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_search) {
+        if (item.getItemId() == R.id.action_search)
             presenter.openGlobalSearch();
-        }
+        if (item.getItemId() == R.id.action_about)
+            startAboutActivity();
         return super.onOptionsItemSelected(item);
     }
 
@@ -97,5 +100,9 @@ public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.Vi
     @Override @NonNull
     public RegionsListPresenterM createPresenter() {
         return new RegionsListPresenterM();
+    }
+
+    private void startAboutActivity() {
+        startActivity(new Intent(getContext(), AboutActivity.class));
     }
 }

@@ -6,4 +6,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="SeparatedTextView">
+        <item name="android:padding">?attr/listPreferredItemPaddingLeft</item>
+        <item name="android:textAppearance">?attr/textAppearanceListItem</item>
+        <item name="android:linksClickable">true</item>
+        <item name="android:autoLink">web</item>
+    </style>
 </resources>
