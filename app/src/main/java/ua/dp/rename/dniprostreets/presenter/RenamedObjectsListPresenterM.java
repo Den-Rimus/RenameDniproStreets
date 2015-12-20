@@ -1,6 +1,7 @@
 package ua.dp.rename.dniprostreets.presenter;
 
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
 
@@ -10,6 +11,7 @@ import javax.inject.Inject;
 
 import rx.Observable;
 import timber.log.Timber;
+import ua.dp.rename.dniprostreets.R;
 import ua.dp.rename.dniprostreets.core.BasePresenter;
 import ua.dp.rename.dniprostreets.entity.CityRegion;
 import ua.dp.rename.dniprostreets.entity.RenamedObject;
@@ -34,7 +36,7 @@ public class RenamedObjectsListPresenterM extends BasePresenter<RenamedObjectsLi
     public void onStart() {
         super.onStart();
         if (id == null) {
-            getView().setTitle("SEARCH_TODO");
+            getView().setTitle((R.string.screen_title_search));
             dataSet = dataRepo.getAllRenamedObjects();
             getView().applyDataSet(dataSet);
         } else {
@@ -78,6 +80,8 @@ public class RenamedObjectsListPresenterM extends BasePresenter<RenamedObjectsLi
     public interface View extends MvpView {
 
         void setTitle(String title);
+
+        void setTitle(@StringRes int titleResId);
 
         void applyDataSet(List<RenamedObject> dataSet);
 
