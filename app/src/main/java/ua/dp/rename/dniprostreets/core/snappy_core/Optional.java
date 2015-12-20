@@ -18,10 +18,6 @@ package ua.dp.rename.dniprostreets.core.snappy_core;
 
 import android.support.annotation.Nullable;
 
-import com.google.common.base.Function;
-import com.google.common.base.Supplier;
-import com.google.common.collect.AbstractIterator;
-
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Set;
