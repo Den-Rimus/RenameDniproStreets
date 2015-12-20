@@ -10,4 +10,6 @@
 
     <string name="menu_item_search_caption">Пошук</string>
     <string name="menu_item_search_hint">Пошук</string>
+    <string name="menu_item_about_caption">Про додаток</string>
+    <string name="screen_title_about">Відомості про додаток</string>
 </resources>
