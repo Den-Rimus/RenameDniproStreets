@@ -87,7 +87,7 @@ public class RenamedObjectsListFragmentM
 
     @Override
     public void onPause() {
-        searchViewSubscription.unsubscribe();
+        if (searchViewSubscription != null) searchViewSubscription.unsubscribe();
         super.onPause();
     }
 
@@ -111,6 +111,7 @@ public class RenamedObjectsListFragmentM
 
     private void initSearch(MenuItem menuItem) {
         searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        searchView.setMaxWidth(Integer.MAX_VALUE);
         searchView.setOnCloseListener(() -> false);
         searchView.setQueryHint(getString(R.string.menu_item_search_hint));
         searchView.setSubmitButtonEnabled(false);
