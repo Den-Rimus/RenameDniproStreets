@@ -11,6 +11,21 @@
 
     <string name="region_former_name_caption">Колишній \"%s\"</string>
 
+    <!-- Object type captions -->
+    <string name="object_type_caption_street">Вулиця</string>
+    <string name="object_type_caption_avenue">Проспект</string>
+    <string name="object_type_caption_area">Житловий масив</string>
+    <string name="object_type_caption_lake">Озеро</string>
+    <string name="object_type_caption_park">Парк</string>
+    <string name="object_type_caption_impasse">Тупик</string>
+    <string name="object_type_caption_lane">Провулок</string>
+    <string name="object_type_caption_embankment">Набережна</string>
+    <string name="object_type_caption_slope">Узвіз</string>
+    <string name="object_type_caption_square">Площа</string>
+    <string name="object_type_caption_island">Острів</string>
+    <string name="object_type_caption_station">Станція</string>
+    <string name="object_type_caption_unknown">Невідомий тип об\'єкта</string>
+
     <!-- About screen resources -->
     <string name="disclaimer">Зверніть увагу!\nЦей додаток не має ніякого відношення до факту перейменування будь-яких об\'єктів.\nАвтора не цікавлять нічиї думки стосовно того, чи треба було перейменовувати, як саме треба було і хто за всим цим стоїть.</string>
     <string name="real_disclaimer">Насправді додак було створено як вправу з програмування і з метою випробувати якісь нові технології та підходи.</string>

@@ -46,7 +46,7 @@ public class RenamedObjectsAdapter extends RecyclerView.Adapter<RenamedObjectsAd
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         RenamedObject item = dataSet.get(position);
-        holder.type.setText(item.getType().getTypeKey());
+        holder.type.setText(context.getString(item.getType().getCaptionResId()));
         holder.newName.setText(item.getNewName());
         holder.oldName.setText(item.getOldName());
     }

@@ -11,6 +11,21 @@
 
     <string name="region_former_name_caption">Former \"%s\"</string>
 
+    <!-- Object type captions -->
+    <string name="object_type_caption_street">Street</string>
+    <string name="object_type_caption_avenue">Avenue</string>
+    <string name="object_type_caption_area">Area</string>
+    <string name="object_type_caption_lake">Lake</string>
+    <string name="object_type_caption_park">Park</string>
+    <string name="object_type_caption_impasse">Impasse</string>
+    <string name="object_type_caption_lane">Lane</string>
+    <string name="object_type_caption_embankment">Embankment</string>
+    <string name="object_type_caption_slope">Slope</string>
+    <string name="object_type_caption_square">Square</string>
+    <string name="object_type_caption_island">Island</string>
+    <string name="object_type_caption_station">Station</string>
+    <string name="object_type_caption_unknown">Unknown object type</string>
+
     <!-- About screen resources -->
     <string name="disclaimer">NOTICE! This app has no relation to the very fact of renaming objects whatsoever.\nAuthor is not interested in any opinions about list of renamed objects, the general necessity of renaming and who\'s behind all this.</string>
     <string name="real_disclaimer">In fact, this app was created as an android development exercise and to get a taste of several new technologies and approaches.</string>
