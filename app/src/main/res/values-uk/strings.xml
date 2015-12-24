@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Dnipro Streets</string>
+
     <string name="screen_title_search">Загальний пошук</string>
+    <string name="screen_title_about">Відомості про додаток</string>
 
-    <string name="region_former_name_caption">Колишній \"%s\"</string>
-
+    <string name="menu_item_about_caption">Про додаток</string>
     <string name="menu_item_search_caption">Пошук</string>
     <string name="menu_item_search_hint">Пошук</string>
-    <string name="menu_item_about_caption">Про додаток</string>
-    <string name="screen_title_about">Відомості про додаток</string>
+
+    <string name="region_former_name_caption">Колишній \"%s\"</string>
 
     <!-- About screen resources -->
     <string name="disclaimer">Зверніть увагу!\nЦей додаток не має ніякого відношення до факту перейменування будь-яких об\'єктів.\nАвтора не цікавлять нічиї думки стосовно того, чи треба було перейменовувати, як саме треба було і хто за всим цим стоїть.</string>
     <string name="real_disclaimer">Насправді додак було створено як вправу з програмування і з метою випробувати якісь нові технології та підходи.</string>
     <string name="info_owner">Даний додаток лише використовує дані з сайта http://rename.dp.ua і презентує їх у зручному для смартфона вигляді.\nДаний додаток чи його автор не здійснюють збір чи обробку інформації стосовно перейменованих об\'єктів отже не має відношення до можливих неточностей чи помилок.\nЗа додатковою інформацією звертайтесь до сайту за адресою вище.</string>
     <string name="open_source_caption">Даний додаток є програмою з відкритим вихідним кодом: https://github.com/Den-Rimus/RenameDniproStreets</string>
-    <string name="licence">Ліцензія: https://github.com/Den-Rimus/RenameDniproStreets#licence--Ліцензія</string>
+    <string name="licence" tools:ignore="TypographyDashes">Ліцензія: https://github.com/Den-Rimus/RenameDniproStreets#licence--Ліцензія</string>
 </resources>

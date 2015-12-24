@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Dnipro Streets</string>
+
+    <string name="screen_title_search">Общий поиск</string>
+    <string name="screen_title_about">Об этой программе</string>
+
+    <string name="menu_item_about_caption">О программе</string>
+    <string name="menu_item_search_caption">Поиск</string>
+    <string name="menu_item_search_hint">Поиск</string>
+
+    <string name="region_former_name_caption">Бывший \"%s\"</string>
+
+    <!-- Object type captions -->
+    <string name="object_type_caption_street">Улица</string>
+    <string name="object_type_caption_avenue">Проспект</string>
+    <string name="object_type_caption_area">Жилой массив</string>
+    <string name="object_type_caption_lake">Озеро</string>
+    <string name="object_type_caption_park">Парк</string>
+    <string name="object_type_caption_impasse">Тупик</string>
+    <string name="object_type_caption_lane">Переулок</string>
+    <string name="object_type_caption_embankment">Набережная</string>
+    <string name="object_type_caption_slope">Спуск</string>
+    <string name="object_type_caption_square">Площадь</string>
+    <string name="object_type_caption_island">Остров</string>
+    <string name="object_type_caption_station">Станция</string>
+    <string name="object_type_caption_unknown">Неизвестный тип объекта</string>
+
+    <!-- About screen resources -->
+    <string name="disclaimer">Обратите внимание!\nЭто приложение не имеет никакого отношения к факту переименования чего-либо.\nАвтора не интересует чье бы то ни было мнение касательно самой необходимости переименования, как именно надо было переименовывать и кто за всем этим стоит.</string>
+    <string name="real_disclaimer">На самом деле приложение создавалось как упражнение по программированию и с целью опробовать некоторые новые технологии и подходы.</string>
+    <string name="info_owner">Приложение лишь использует данные с сайта http://rename.dp.ua и подает их в удобном для смартфона виде.\nПриложение или его автор не осуществляют сбор или обработку информации касательно переименованных объектов. Следовательно - не могут иметь отношения к возможным неточностям или ошибкам.\nЗа дополнительной информацией обращайтесь на сайт (адрес указан выше).</string>
+    <string name="open_source_caption">Приложение является программой с открытым исходным кодом: https://github.com/Den-Rimus/RenameDniproStreets</string>
+    <string name="licence" tools:ignore="TypographyDashes">Лицензия: https://github.com/Den-Rimus/RenameDniproStreets#licence--Ліцензія</string>
+</resources>
