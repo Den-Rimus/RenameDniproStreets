@@ -1,10 +1,10 @@
 package ua.dp.rename.dniprostreets.view;
 
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import ua.dp.rename.dniprostreets.R;
+import ua.dp.rename.dniprostreets.util.RotationUtil;
 import ua.dp.rename.dniprostreets.view.fragment.RegionsListFragmentM;
 
 public class MainActivity extends AppCompatActivity {
@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        RotationUtil.lockScreenOrientation(this);
     }
 
     @Override
