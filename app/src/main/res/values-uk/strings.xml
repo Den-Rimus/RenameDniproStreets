@@ -11,6 +11,8 @@
 
     <string name="region_former_name_caption">Колишній \"%s\"</string>
 
+    <string name="general_error_snack_caption">Виникла якась помилка =(</string>
+
     <!-- Object type captions -->
     <string name="object_type_caption_street">Вулиця</string>
     <string name="object_type_caption_avenue">Проспект</string>

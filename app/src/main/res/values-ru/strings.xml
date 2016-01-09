@@ -11,6 +11,8 @@
 
     <string name="region_former_name_caption">Бывший \"%s\"</string>
 
+    <string name="general_error_snack_caption">Возникла ошибка =(</string>
+
     <!-- Object type captions -->
     <string name="object_type_caption_street">Улица</string>
     <string name="object_type_caption_avenue">Проспект</string>

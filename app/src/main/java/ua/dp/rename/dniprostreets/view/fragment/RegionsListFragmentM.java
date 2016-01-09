@@ -94,7 +94,7 @@ public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.Vi
     @Override
     public void showError() {
         if (getView() != null)
-            Snackbar.make(getView(), "Some error happened", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(), R.string.general_error_snack_caption, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override @NonNull
