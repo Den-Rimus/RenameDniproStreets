@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Dnipro Streets</string>
+    <string name="app_name">Улицы Днепра</string>
 
     <string name="screen_title_search">Общий поиск</string>
     <string name="screen_title_about">Об этой программе</string>
@@ -31,7 +31,7 @@
     <!-- About screen resources -->
     <string name="disclaimer">Обратите внимание!\nЭто приложение не имеет никакого отношения к факту переименования чего-либо.\nАвтора не интересует чье бы то ни было мнение касательно самой необходимости переименования, как именно надо было переименовывать и кто за всем этим стоит.</string>
     <string name="real_disclaimer">На самом деле приложение создавалось как упражнение по программированию и с целью опробовать некоторые новые технологии и подходы.</string>
-    <string name="info_owner">Приложение лишь использует данные с сайта http://rename.dp.ua и подает их в удобном для смартфона виде.\nПриложение или его автор не осуществляют сбор или обработку информации касательно переименованных объектов. Следовательно - не могут иметь отношения к возможным неточностям или ошибкам.\nЗа дополнительной информацией обращайтесь на сайт (адрес указан выше).</string>
+    <string name="info_owner">Приложение лишь использует данные с сайта http://rename.dp.ua и подает их в удобном для смартфона виде.\nПриложение или его автор не осуществляют сбор или обработку информации касательно переименованных объектов. Следовательно - не могут иметь отношения к возможным неточностям или ошибкам.\nЗа дополнительной информацией обращайтесь на сайт (адрес указан выше). Исправления и замечания присылайте на адрес info@rename.dp.ua</string>
     <string name="open_source_caption">Приложение является программой с открытым исходным кодом: https://github.com/Den-Rimus/RenameDniproStreets</string>
     <string name="licence" tools:ignore="TypographyDashes">Лицензия: https://github.com/Den-Rimus/RenameDniproStreets#licence--Ліцензія</string>
 </resources>

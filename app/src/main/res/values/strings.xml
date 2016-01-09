@@ -31,7 +31,7 @@
     <!-- About screen resources -->
     <string name="disclaimer">NOTICE! This app has no relation to the very fact of renaming objects whatsoever.\nAuthor is not interested in any opinions about list of renamed objects, the general necessity of renaming and who\'s behind all this.</string>
     <string name="real_disclaimer">In fact, this app was created as an android development exercise and to get a taste of several new technologies and approaches.</string>
-    <string name="info_owner">This app only uses data from http://rename.dp.ua web-site and presents it in smartphone-friendly way.\nThis app or it\'s author do not collect or process any data about renamed objects thus are not responsible for possible inaccuracies or errors.\nAddress web-site above for additional information.</string>
+    <string name="info_owner">This app only uses data from http://rename.dp.ua web-site and presents it in smartphone-friendly way.\nThis app or it\'s author do not collect or process any data about renamed objects thus are not responsible for possible inaccuracies or errors.\nAddress web-site above for additional information. Please send you corrections and offers to info@rename.dp.ua</string>
     <string name="open_source_caption">This is an open-source app: https://github.com/Den-Rimus/RenameDniproStreets</string>
     <string name="licence" tools:ignore="TypographyDashes">Licence: https://github.com/Den-Rimus/RenameDniproStreets#licence--Ліцензія</string>
 </resources>
