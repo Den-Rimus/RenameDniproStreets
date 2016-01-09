@@ -21,6 +21,7 @@ import ua.dp.rename.dniprostreets.entity.CityRegion;
 
 public class SnappyRepository {
 
+    private static final String LAST_UPDATE_TIMESTAMP = "LAST_UPDATE_TIMESTAMP";
     private static final String CITY_REGION = "CITY_REGION";
     private static final String RENAMED_OBJECT = "RENAMED_OBJECT";
 
@@ -151,5 +152,13 @@ public class SnappyRepository {
 
     public List<CityRegion> getCityRegions() {
         return readList(CITY_REGION, CityRegion.class);
+    }
+
+    public void setLastUpdateTimestamp(long lastUpdateTimestamp) {
+        act(db -> db.putLong(LAST_UPDATE_TIMESTAMP, lastUpdateTimestamp));
+    }
+
+    public long getLastUpdateTimestamp() {
+        return actWithResult(db -> db.getLong(LAST_UPDATE_TIMESTAMP)).or(1001L);
     }
 }

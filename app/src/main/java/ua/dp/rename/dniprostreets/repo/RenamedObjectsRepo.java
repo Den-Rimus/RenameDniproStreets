@@ -13,6 +13,7 @@ import timber.log.Timber;
 import ua.dp.rename.dniprostreets.api.RenamedObjectsService;
 import ua.dp.rename.dniprostreets.entity.ApiDataHolder;
 import ua.dp.rename.dniprostreets.entity.CityRegion;
+import ua.dp.rename.dniprostreets.entity.LastUpdateHolder;
 import ua.dp.rename.dniprostreets.entity.RenamedObject;
 import ua.dp.rename.dniprostreets.rx.IoToMainComposer;
 
@@ -37,19 +38,11 @@ public class RenamedObjectsRepo {
     ///////////////////////////////////////////////////////////////////////////
 
     public void requestUpdate() {
-        apiService.getJson()
+        apiService.getLastDataUpdateTimestamp()
+                .map(LastUpdateHolder::getLastUpdate)
+                .filter(this::updateNeeded)
                 .compose(new IoToMainComposer<>())
-                .subscribe(this::dataSetObtained, e -> {
-                    pokeAttachedListenersWithError();
-                    Timber.e(e, "API error");
-                });
-    }
-
-    public void dataSetObtained(ApiDataHolder cityData) {
-        asList = cityData.getRegionsAsList();
-        asMap = ApiDataHolder.getRegionsAsMap(asList);
-        pokeAttachedListenersWithSuccess();
-        db.putCityRegions(asList);
+                .subscribe(l -> performUpdate(), e -> performUpdate());
     }
 
     public List<CityRegion> getRegionsAsList() {
@@ -70,6 +63,31 @@ public class RenamedObjectsRepo {
         Queryable.from(asList).forEachR(region -> superSet.addAll(region.getObjects()));
 
         return Queryable.from(superSet).sort(RenamedObject.ALPHABETICAL_COMPARATOR).distinct().toList();
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Essential private methods
+    ///////////////////////////////////////////////////////////////////////////
+
+    private void performUpdate() {
+        apiService.getJson()
+                .compose(new IoToMainComposer<>())
+                .subscribe(this::dataSetObtained, e -> {
+                    pokeAttachedListenersWithError();
+                    Timber.e(e, "API error");
+                });
+    }
+
+    private boolean updateNeeded(long lastUpdate) {
+        return db.getLastUpdateTimestamp() < lastUpdate;
+    }
+
+    private void dataSetObtained(ApiDataHolder cityData) {
+        asList = cityData.getRegionsAsList();
+        asMap = ApiDataHolder.getRegionsAsMap(asList);
+        pokeAttachedListenersWithSuccess();
+        db.putCityRegions(asList);
+        db.setLastUpdateTimestamp(System.currentTimeMillis());
     }
 
     ///////////////////////////////////////////////////////////////////////////
