@@ -1,6 +1,5 @@
 package ua.dp.rename.dniprostreets.di.module;
 
-import com.google.gson.FieldNamingPolicy;
 import com.google.gson.GsonBuilder;
 
 import javax.inject.Singleton;
@@ -33,7 +32,6 @@ public class ApiModule {
     GsonConverter provideGsonConverter() {
         return new GsonConverter(new GsonBuilder()
                 .serializeNulls()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory("unknown"))
                 .create());
     }

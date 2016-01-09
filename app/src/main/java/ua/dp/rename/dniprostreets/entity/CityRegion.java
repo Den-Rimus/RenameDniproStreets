@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import com.esotericsoftware.kryo.DefaultSerializer;
 import com.esotericsoftware.kryo.serializers.CompatibleFieldSerializer;
-import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -13,9 +12,9 @@ import java.util.List;
 public class CityRegion implements Parcelable {
 
     private String id;
-    @SerializedName("oldAreaName") private String oldAreaName;
-    @SerializedName("newAreaName") private String newAreaName;
-    @SerializedName("objects") private List<RenamedObject> objects;
+    private String oldAreaName;
+    private String newAreaName;
+    private List<RenamedObject> objects;
 
     public CityRegion() {
     }
