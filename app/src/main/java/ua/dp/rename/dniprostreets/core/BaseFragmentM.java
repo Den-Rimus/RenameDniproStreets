@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import com.hannesdorfmann.mosby.mvp.MvpFragment;
 import com.hannesdorfmann.mosby.mvp.MvpView;
@@ -74,6 +75,20 @@ public abstract class BaseFragmentM<V extends MvpView, P extends BasePresenter<V
 
     protected void informUser(@StringRes int messageResId) {
         informUser(getString(messageResId));
+    }
+
+    /** Try hide soft keyboard if visible */
+    public static void hideSoftInput(View view) {
+        if (view == null) return;
+        //
+        InputMethodManager inputManager = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        view.clearFocus();
+    }
+
+    /** Try hide soft keyboard based on current fragment's view */
+    public void tryHideSoftInput() {
+        hideSoftInput(getView());
     }
 
     protected Parcelable getArgs() {

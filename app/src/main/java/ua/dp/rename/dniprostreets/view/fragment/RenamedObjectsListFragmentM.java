@@ -48,9 +48,9 @@ public class RenamedObjectsListFragmentM
     Toolbar toolbar;
     SearchView searchView;
     private boolean expandForGlobalSearch;
-
+    //
     private RenamedObjectsAdapter adapter;
-
+    //
     private Subscription searchViewSubscription;
 
     @Override
@@ -63,18 +63,17 @@ public class RenamedObjectsListFragmentM
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ((App) getActivity().getApplication()).component().inject(this.presenter);
-
+        //
         expandForGlobalSearch = ((RenamedObjectsListBundle) getArgs()).isGlobalSearch();
-
+        //
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-
+        initToolbar(toolbar);
+        //
         adapter = new RenamedObjectsAdapter(getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
         recyclerView.setAdapter(adapter);
-
-        initToolbar(toolbar);
-
+        //
         presenter.onStart();
     }
 
@@ -112,11 +111,14 @@ public class RenamedObjectsListFragmentM
     private void initSearch(MenuItem menuItem) {
         searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
         searchView.setMaxWidth(Integer.MAX_VALUE);
-        searchView.setOnCloseListener(() -> false);
+        searchView.setOnCloseListener(() -> {
+            tryHideSoftInput();
+            return false;
+        });
         searchView.setQueryHint(getString(R.string.menu_item_search_hint));
         searchView.setSubmitButtonEnabled(false);
         searchView.setQuery(null, false);
-
+        //
         subscribeSearch(searchView);
     }
 
