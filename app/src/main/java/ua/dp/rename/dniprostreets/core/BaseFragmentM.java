@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,6 +65,15 @@ public abstract class BaseFragmentM<V extends MvpView, P extends BasePresenter<V
         } else {
             return getLayoutFromAnnotation(clazz.getSuperclass());
         }
+    }
+
+    protected void informUser(String message) {
+        if (getView() != null)
+            Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT).show();
+    }
+
+    protected void informUser(@StringRes int messageResId) {
+        informUser(getString(messageResId));
     }
 
     protected Parcelable getArgs() {
