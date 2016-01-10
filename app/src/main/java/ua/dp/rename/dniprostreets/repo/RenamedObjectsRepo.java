@@ -42,7 +42,7 @@ public class RenamedObjectsRepo {
                 .map(LastUpdateHolder::getLastUpdate)
                 .filter(this::updateNeeded)
                 .compose(new IoToMainComposer<>())
-                .subscribe(l -> performUpdate(), e -> performUpdate());
+                .subscribe(l -> performUpdate(), e -> pokeAttachedListenersWithError());
     }
 
     public List<CityRegion> getRegionsAsList() {
