@@ -15,6 +15,7 @@ import ua.dp.rename.dniprostreets.R;
 import ua.dp.rename.dniprostreets.core.BasePresenter;
 import ua.dp.rename.dniprostreets.entity.CityRegion;
 import ua.dp.rename.dniprostreets.entity.RenamedObject;
+import ua.dp.rename.dniprostreets.event.RenamedObjectClickedEvent;
 import ua.dp.rename.dniprostreets.repo.RenamedObjectsRepo;
 import ua.dp.rename.dniprostreets.rx.MainComposer;
 
@@ -49,6 +50,11 @@ public class RenamedObjectsListPresenterM extends BasePresenter<RenamedObjectsLi
                 getView().setTitle(region.getOldAreaName());
             }
         }
+    }
+
+    @SuppressWarnings("unused")
+    public void onEventMainThread(final RenamedObjectClickedEvent event) {
+        getView().openDetails(event.getModel());
     }
 
     public void searchRequested(final String query) {
@@ -86,6 +92,8 @@ public class RenamedObjectsListPresenterM extends BasePresenter<RenamedObjectsLi
         void applyDataSet(List<RenamedObject> dataSet);
 
         void showError(String message);
+
+        void openDetails(RenamedObject model);
     }
 
     public enum SearchState {

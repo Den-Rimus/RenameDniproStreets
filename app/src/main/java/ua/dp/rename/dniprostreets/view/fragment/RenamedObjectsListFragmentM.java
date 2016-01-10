@@ -153,6 +153,10 @@ public class RenamedObjectsListFragmentM
         adapter.setAll(dataSet);
     }
 
+    @Override
+    public void openDetails(RenamedObject model) {
+    }
+
     @Override @NonNull
     public RenamedObjectsListPresenterM createPresenter() {
         return new RenamedObjectsListPresenterM(((RenamedObjectsListBundle) getArgs()).getId());

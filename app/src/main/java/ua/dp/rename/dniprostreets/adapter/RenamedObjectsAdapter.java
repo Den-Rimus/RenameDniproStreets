@@ -13,13 +13,17 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 import ua.dp.rename.dniprostreets.R;
 import ua.dp.rename.dniprostreets.entity.RenamedObject;
+import ua.dp.rename.dniprostreets.event.RenamedObjectClickedEvent;
 
 public class RenamedObjectsAdapter extends RecyclerView.Adapter<RenamedObjectsAdapter.ViewHolder> {
 
     private Context context;
     private List<RenamedObject> dataSet = new ArrayList<>();
+
+    private View.OnClickListener itemClickListener;
 
     public RenamedObjectsAdapter(Context context) {
         this(context, new ArrayList<>());
@@ -28,6 +32,8 @@ public class RenamedObjectsAdapter extends RecyclerView.Adapter<RenamedObjectsAd
     public RenamedObjectsAdapter(Context context, List<RenamedObject> dataSet) {
         this.context = context;
         this.dataSet.addAll(dataSet);
+        itemClickListener = v -> EventBus.getDefault()
+                .post(new RenamedObjectClickedEvent((RenamedObject) v.getTag(R.id.recycler_view_item_tag)));
     }
 
     public void setAll(Collection<RenamedObject> dataSet) {
@@ -46,6 +52,7 @@ public class RenamedObjectsAdapter extends RecyclerView.Adapter<RenamedObjectsAd
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         RenamedObject item = dataSet.get(position);
+        holder.rootView.setTag(R.id.recycler_view_item_tag, item);
         holder.type.setText(context.getString(item.getType().getCaptionResId()));
         holder.newName.setText(item.getNewName());
         holder.oldName.setText(item.getOldName());
@@ -56,8 +63,9 @@ public class RenamedObjectsAdapter extends RecyclerView.Adapter<RenamedObjectsAd
         return dataSet.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
+        @Bind(R.id.rootView) View rootView;
         @Bind(R.id.typeTextView) TextView type;
         @Bind(R.id.renamedTextView) TextView newName;
         @Bind(R.id.formerTextView) TextView oldName;
@@ -65,6 +73,8 @@ public class RenamedObjectsAdapter extends RecyclerView.Adapter<RenamedObjectsAd
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            //
+            rootView.setOnClickListener(itemClickListener);
         }
     }
 }
