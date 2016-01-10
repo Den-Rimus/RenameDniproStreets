@@ -5,19 +5,16 @@ import android.os.Parcelable;
 
 import com.esotericsoftware.kryo.DefaultSerializer;
 import com.esotericsoftware.kryo.serializers.CompatibleFieldSerializer;
-import com.google.gson.annotations.SerializedName;
 
 import java.util.Comparator;
 
 @DefaultSerializer(CompatibleFieldSerializer.class)
 public class RenamedObject implements Parcelable {
 
-    @SerializedName("type")
     private ObjectType type;
-    @SerializedName("oldName")
     private String oldName;
-    @SerializedName("newName")
     private String newName;
+    private DetailsLink link;
 
     public RenamedObject() {
     }
@@ -34,6 +31,14 @@ public class RenamedObject implements Parcelable {
         return newName;
     }
 
+    public DetailsLink getLink() {
+        return link;
+    }
+
+    public boolean hasLink() {
+        return link != null && link.getUrl()!= null && !link.getUrl().isEmpty();
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     // Parcelable
     ///////////////////////////////////////////////////////////////////////////
@@ -42,6 +47,7 @@ public class RenamedObject implements Parcelable {
         type = (ObjectType) in.readSerializable();
         oldName = in.readString();
         newName = in.readString();
+        link = in.readParcelable(DetailsLink.class.getClassLoader());
     }
 
     @Override
@@ -49,6 +55,12 @@ public class RenamedObject implements Parcelable {
         dest.writeSerializable(type);
         dest.writeString(oldName);
         dest.writeString(newName);
+        dest.writeParcelable(link, flags);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<RenamedObject> CREATOR = new Creator<RenamedObject>() {
@@ -62,11 +74,6 @@ public class RenamedObject implements Parcelable {
             return new RenamedObject[size];
         }
     };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
     ///////////////////////////////////////////////////////////////////////////
     // Sorting and stuff
