@@ -23,17 +23,20 @@ public class SnappyRepository {
 
     private static final String LAST_UPDATE_TIMESTAMP = "LAST_UPDATE_TIMESTAMP";
     private static final String CITY_REGION = "CITY_REGION";
-    private static final String RENAMED_OBJECT = "RENAMED_OBJECT";
+    private static final String CACHE_VERSION_KEY = "CACHE_VERSION_KEY";
+
+    static final int CACHE_VERSION = 1;
 
     private Context context;
     private ExecutorService executorService;
 
     public SnappyRepository(Context context) {
-        if (context == null) {
-            throw new IllegalArgumentException("Context is null");
-        }
+        if (context == null) throw new IllegalArgumentException("Context is null");
+        //
         this.context = context;
         this.executorService = Executors.newSingleThreadExecutor();
+        //
+        new SnappyMigrator(this).tryMigration();
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -104,17 +107,6 @@ public class SnappyRepository {
         return e.getMessage().contains("NotFound");
     }
 
-    public void clearAll() {
-        act(DB::destroy);
-    }
-
-    public Boolean isEmpty(String key) {
-        return actWithResult((db) -> {
-            String[] keys = db.findKeys(key);
-            return keys == null || keys.length == 0;
-        }).or(false);
-    }
-
     ///////////////////////////////////////////////////////////////////////////
     // Public
     ///////////////////////////////////////////////////////////////////////////
@@ -142,6 +134,17 @@ public class SnappyRepository {
         });
     }
 
+    public void clearAll() {
+        act(DB::destroy);
+    }
+
+    public Boolean isEmptyForKey(String key) {
+        return actWithResult((db) -> {
+            String[] keys = db.findKeys(key);
+            return keys == null || keys.length == 0;
+        }).or(false);
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     // Essential methods
     ///////////////////////////////////////////////////////////////////////////
@@ -160,5 +163,13 @@ public class SnappyRepository {
 
     public long getLastUpdateTimestamp() {
         return actWithResult(db -> db.getLong(LAST_UPDATE_TIMESTAMP)).or(1001L);
+    }
+
+    void setCacheVersion(int newVersion) {
+        act(db -> db.put(CACHE_VERSION_KEY, newVersion));
+    }
+
+    int getCacheVersion() {
+        return actWithResult(db -> db.getInt(CACHE_VERSION_KEY)).or(0);
     }
 }
