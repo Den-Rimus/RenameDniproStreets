@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/vertical_list_background"
+    >
+
+    <include layout="@layout/include_default_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/list_default_side_margin"
+        android:paddingRight="@dimen/list_default_side_margin"
+        >
+
+        <View
+            android:layout_width="@dimen/shadow_size"
+            android:layout_height="match_parent"
+            android:background="@drawable/shadow_vertical_left"
+            />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            >
+
+            <include layout="@layout/region_list_content" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="@dimen/shadow_size"
+            android:layout_height="match_parent"
+            android:background="@drawable/shadow_vertical_right"
+            />
+    </LinearLayout>
+</LinearLayout>
