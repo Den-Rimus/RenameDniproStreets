@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="VerticalListRecycler" parent="VerticalListScroll">
+        <item name="android:overScrollMode">never</item>
+    </style>
+</resources>

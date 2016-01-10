@@ -34,4 +34,10 @@
     <string name="info_owner">Приложение лишь использует данные с сайта http://rename.dp.ua и подает их в удобном для смартфона виде.\nПриложение или его автор не осуществляют сбор или обработку информации касательно переименованных объектов. Следовательно - не могут иметь отношения к возможным неточностям или ошибкам.\nЗа дополнительной информацией обращайтесь на сайт (адрес указан выше). Исправления и замечания присылайте на адрес info@rename.dp.ua</string>
     <string name="open_source_caption">Приложение является программой с открытым исходным кодом: https://github.com/Den-Rimus/RenameDniproStreets</string>
     <string name="licence" tools:ignore="TypographyDashes">Лицензия: https://github.com/Den-Rimus/RenameDniproStreets#licence--Ліцензія</string>
+
+    <!-- Detail screen resources -->
+    <string name="details_screen_title">Детали</string>
+    <string name="details_old_caption">Старое название:</string>
+    <string name="details_new_caption">Новое название:</string>
+    <string name="details_button_caption">Узнать больше</string>
 </resources>

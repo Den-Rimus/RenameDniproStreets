@@ -153,6 +153,11 @@ public class RenamedObjectsListFragmentM
 
     @Override
     public void openDetails(RenamedObject model) {
+        getFragmentManager().beginTransaction().replace(R.id.main_container,
+                DetailsFragment.instantiate(getContext(),
+                        DetailsFragment.class.getName(), model))
+                .addToBackStack(DetailsFragment.class.getName())
+                .commit();
     }
 
     @Override @NonNull

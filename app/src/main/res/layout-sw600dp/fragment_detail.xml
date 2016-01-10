@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/vertical_list_background"
+    >
+
+    <include layout="@layout/include_default_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/VerticalListScroll"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <View
+                android:layout_width="@dimen/shadow_size"
+                android:layout_height="match_parent"
+                android:background="@drawable/shadow_vertical_left"
+                />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:paddingRight="@dimen/activity_vertical_margin"
+                android:background="@android:color/white"
+                >
+
+                <include layout="@layout/details_content" />
+            </FrameLayout>
+
+            <View
+                android:layout_width="@dimen/shadow_size"
+                android:layout_height="match_parent"
+                android:background="@drawable/shadow_vertical_right"
+                />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

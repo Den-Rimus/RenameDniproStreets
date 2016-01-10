@@ -34,4 +34,10 @@
     <string name="info_owner">Даний додаток лише використовує дані з сайта http://rename.dp.ua і презентує їх у зручному для смартфона вигляді.\nДаний додаток чи його автор не здійснюють збір чи обробку інформації стосовно перейменованих об\'єктів отже не має відношення до можливих неточностей чи помилок.\nЗа додатковою інформацією звертайтесь до сайту за адресою вище. Виправлення та пропозиції надсилайте за адресою info@rename.dp.ua</string>
     <string name="open_source_caption">Даний додаток є програмою з відкритим вихідним кодом: https://github.com/Den-Rimus/RenameDniproStreets</string>
     <string name="licence" tools:ignore="TypographyDashes">Ліцензія: https://github.com/Den-Rimus/RenameDniproStreets#licence--Ліцензія</string>
+
+    <!-- Detail screen resources -->
+    <string name="details_screen_title">Деталі</string>
+    <string name="details_old_caption">Стара назва:</string>
+    <string name="details_new_caption">Нова назва:</string>
+    <string name="details_button_caption">Дізнатися більше</string>
 </resources>
