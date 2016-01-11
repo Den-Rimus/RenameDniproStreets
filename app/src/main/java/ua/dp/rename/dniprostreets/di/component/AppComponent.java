@@ -6,6 +6,7 @@ import dagger.Component;
 import ua.dp.rename.dniprostreets.App;
 import ua.dp.rename.dniprostreets.di.module.ApiModule;
 import ua.dp.rename.dniprostreets.di.module.AppModule;
+import ua.dp.rename.dniprostreets.di.module.ComponentsInitializerModule;
 import ua.dp.rename.dniprostreets.di.module.RenamedObjectsRepoModule;
 import ua.dp.rename.dniprostreets.di.module.SnappyModule;
 import ua.dp.rename.dniprostreets.presenter.RegionsListPresenterM;
@@ -18,6 +19,7 @@ import ua.dp.rename.dniprostreets.repo.RenamedObjectsRepo;
         ApiModule.class,
         RenamedObjectsRepoModule.class,
         SnappyModule.class,
+        ComponentsInitializerModule.class,
 })
 public interface AppComponent {
     void inject(App application);

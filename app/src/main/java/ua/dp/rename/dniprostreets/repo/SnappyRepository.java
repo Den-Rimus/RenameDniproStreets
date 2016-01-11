@@ -35,8 +35,6 @@ public class SnappyRepository {
         //
         this.context = context;
         this.executorService = Executors.newSingleThreadExecutor();
-        //
-        new SnappyMigrator(this).tryMigration();
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -166,10 +164,10 @@ public class SnappyRepository {
     }
 
     void setCacheVersion(int newVersion) {
-        act(db -> db.put(CACHE_VERSION_KEY, newVersion));
+        act(db -> db.putInt(CACHE_VERSION_KEY, newVersion));
     }
 
     int getCacheVersion() {
-        return actWithResult(db -> db.getInt(CACHE_VERSION_KEY)).or(0);
+         return actWithResult(db -> db.getInt(CACHE_VERSION_KEY)).or(0);
     }
 }

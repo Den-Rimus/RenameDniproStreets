@@ -8,7 +8,7 @@ public class SnappyMigrator {
         this.db = db;
     }
 
-    void tryMigration() {
+    public void tryMigration() {
         int currentVersion = db.getCacheVersion();
         if (currentVersion < SnappyRepository.CACHE_VERSION)
             migrate(SnappyRepository.CACHE_VERSION);
@@ -17,7 +17,7 @@ public class SnappyMigrator {
     private void migrate(int newVersion) {
         if (newVersion == 1) {
             db.clearAll();
-            db.setCacheVersion(newVersion);
+            db.setCacheVersion(1);
         }
         //
         if (newVersion == 2) {
