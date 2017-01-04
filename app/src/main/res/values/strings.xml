@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Dnipro Streets</string>
+   <string name="app_name">Dnipro Streets</string>
 
-    <string name="screen_title_search">Global search</string>
-    <string name="screen_title_about">About this app</string>
+   <string name="screen_title_search">Global search</string>
+   <string name="screen_title_about">About this app</string>
 
-    <string name="menu_item_search_caption">Search</string>
-    <string name="menu_item_about_caption">About</string>
-    <string name="menu_item_search_hint">Search</string>
+   <string name="menu_item_search_caption">Search</string>
+   <string name="menu_item_about_caption">About</string>
+   <string name="menu_item_search_hint">Search</string>
 
-    <string name="region_former_name_caption">Former \"%s\"</string>
+   <string name="region_former_name_caption">Former \"%s\"</string>
 
-    <string name="general_error_snack_caption">Something went wrong =(</string>
+   <string name="general_error_snack_caption">Something went wrong =(</string>
 
-    <!-- Object type captions -->
-    <string name="object_type_caption_street">Street</string>
-    <string name="object_type_caption_avenue">Avenue</string>
-    <string name="object_type_caption_area">Area</string>
-    <string name="object_type_caption_lake">Lake</string>
-    <string name="object_type_caption_park">Park</string>
-    <string name="object_type_caption_impasse">Impasse</string>
-    <string name="object_type_caption_lane">Lane</string>
-    <string name="object_type_caption_embankment">Embankment</string>
-    <string name="object_type_caption_slope">Slope</string>
-    <string name="object_type_caption_square">Square</string>
-    <string name="object_type_caption_island">Island</string>
-    <string name="object_type_caption_station">Station</string>
-    <string name="object_type_caption_unknown">Unknown object type</string>
+   <!-- Object type captions -->
+   <string name="object_type_caption_street">Street</string>
+   <string name="object_type_caption_avenue">Avenue</string>
+   <string name="object_type_caption_area">Area</string>
+   <string name="object_type_caption_lake">Lake</string>
+   <string name="object_type_caption_park">Park</string>
+   <string name="object_type_caption_impasse">Impasse</string>
+   <string name="object_type_caption_lane">Lane</string>
+   <string name="object_type_caption_embankment">Embankment</string>
+   <string name="object_type_caption_slope">Slope</string>
+   <string name="object_type_caption_square">Square</string>
+   <string name="object_type_caption_island">Island</string>
+   <string name="object_type_caption_station">Station</string>
+   <string name="object_type_caption_unknown">Unknown object type</string>
 
-    <!-- About screen resources -->
-    <string name="disclaimer">NOTICE! This app has no relation to the very fact of renaming objects whatsoever.\nAuthor is not interested in any opinions about list of renamed objects, the general necessity of renaming and who\'s behind all this.</string>
-    <string name="real_disclaimer">In fact, this app was created as an android development exercise and to get a taste of several new technologies and approaches.</string>
-    <string name="info_owner">This app only uses data from http://rename.dp.ua web-site and presents it in smartphone-friendly way.\nThis app or it\'s author do not collect or process any data about renamed objects thus are not responsible for possible inaccuracies or errors.\nAddress web-site above for additional information. Please send you corrections and offers to info@rename.dp.ua</string>
-    <string name="open_source_caption">This is an open-source app: https://github.com/Den-Rimus/RenameDniproStreets</string>
-    <string name="licence" tools:ignore="TypographyDashes">Licence: https://github.com/Den-Rimus/RenameDniproStreets#licence--Ліцензія</string>
+   <!-- About screen resources -->
+   <string name="disclaimer">NOTICE! This app has no relation to the very fact of renaming objects whatsoever.\nAuthor is not interested in any opinions about list of renamed objects, the general necessity of renaming and who\'s behind all this.</string>
+   <string name="real_disclaimer">In fact, this app was created as an android development exercise and to get a taste of several new technologies and approaches.</string>
+   <string name="info_owner">This app only uses data from http://rename.dp.ua web-site and presents it in smartphone-friendly way.\nThis app or it\'s author do not collect or process any data about renamed objects thus are not responsible for possible inaccuracies or errors.\nAddress web-site above for additional information. Please send you corrections and offers to info@rename.dp.ua</string>
+   <string name="open_source_caption">This is an open-source app: https://github.com/Den-Rimus/RenameDniproStreets</string>
+   <string name="licence" tools:ignore="TypographyDashes">Licence: https://github.com/Den-Rimus/RenameDniproStreets#licence--Ліцензія</string>
 
-    <!-- Detail screen resources -->
-    <string name="details_screen_title">Details</string>
-    <string name="details_region_caption">Region:</string>
-    <string name="details_old_caption">Old name:</string>
-    <string name="details_new_caption">New name:</string>
-    <string name="details_button_caption">Learn more</string>
+   <!-- Detail screen resources -->
+   <string name="details_screen_title">Details</string>
+   <string name="details_region_caption">Region:</string>
+   <string name="details_old_caption">Old name:</string>
+   <string name="details_new_caption">New name:</string>
+   <string name="details_button_caption">Learn more</string>
 
-    <!-- Non-translatable -->
-    <string name="details_region_format" translatable="false">%s (%s)</string>
+   <!-- Non-translatable -->
+   <string name="details_region_format" translatable="false">%s (%s)</string>
 </resources>
