@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootView"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="?attr/listPreferredItemPaddingLeft"
     >
 
@@ -13,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?attr/textAppearanceListItem"
+        tools:text="Кам'янка"
         />
 
     <TextView
@@ -21,5 +23,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/sub_caption_text_size"
         android:visibility="invisible"
+        tools:visibility="visible"
+        tools:text="Фрунзенський"
         />
 </LinearLayout>
