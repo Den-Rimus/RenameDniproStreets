@@ -20,7 +20,7 @@ public class AboutActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         RotationUtil.lockScreenOrientation(this);
         toolbar.setTitle(R.string.screen_title_about);
-        toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        toolbar.setNavigationIcon(R.drawable.back_icon);
         toolbar.setNavigationOnClickListener(view -> onBackPressed());
     }
 }

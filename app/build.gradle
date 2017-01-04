@@ -13,12 +13,12 @@ repositories {
 // App version
 def versionMajor = 1
 def versionMinor = 0
-def versionPatch = 3
-def versionCodee = 4
+def versionPatch = 4
+def versionCodee = 5
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         applicationId "ua.dp.rename.dniprostreets"
@@ -61,9 +61,9 @@ retrolambda {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
-    compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:design:25.1.0'
+    compile 'com.android.support:recyclerview-v7:25.1.0'
     compile 'com.jakewharton:butterknife:7.0.1'
 
     compile 'com.google.code.gson:gson:2.5'
