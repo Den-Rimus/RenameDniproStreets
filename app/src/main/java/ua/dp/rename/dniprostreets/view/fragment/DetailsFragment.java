@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 import butterknife.Bind;
 import butterknife.OnClick;
 import ua.dp.rename.dniprostreets.R;
@@ -28,6 +30,7 @@ public class DetailsFragment extends BaseFragmentM<DetailsPresenter.View, Detail
    @Bind(R.id.newName) TextView newName;
    @Bind(R.id.details) Button details;
    @Bind(R.id.toolbar) Toolbar toolbar;
+   @Bind(R.id.regionName) TextView regionNameCaption;
 
    @Override
    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -44,6 +47,15 @@ public class DetailsFragment extends BaseFragmentM<DetailsPresenter.View, Detail
       oldName.setText(model.getOldName());
       newName.setText(model.getNewName());
       details.setVisibility(model.hasLink() ? View.VISIBLE : View.GONE);
+
+      final String regionName;
+      if (model.getRegionOldName().equals(model.getRegionNewName())) {
+         regionName = model.getRegionNewName();
+      } else {
+         regionName = String.format(Locale.US, getString(R.string.details_region_format), model.getRegionNewName(),
+               model.getRegionOldName());
+      }
+      regionNameCaption.setText(regionName);
    }
 
    @OnClick(R.id.details)

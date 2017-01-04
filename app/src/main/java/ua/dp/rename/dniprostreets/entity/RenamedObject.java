@@ -2,6 +2,7 @@ package ua.dp.rename.dniprostreets.entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import com.esotericsoftware.kryo.DefaultSerializer;
 import com.esotericsoftware.kryo.serializers.CompatibleFieldSerializer;
@@ -15,6 +16,8 @@ public class RenamedObject implements Parcelable {
    private String oldName;
    private String newName;
    private DetailsLink link;
+   private String regionNewName;
+   private String regionOldName;
 
    public RenamedObject() {
    }
@@ -35,6 +38,22 @@ public class RenamedObject implements Parcelable {
       return link;
    }
 
+   public String getRegionNewName() {
+      return regionNewName;
+   }
+
+   public String getRegionOldName() {
+      return regionOldName;
+   }
+
+   public void setRegionNewName(String regionNewName) {
+      this.regionNewName = regionNewName;
+   }
+
+   public void setRegionOldName(@Nullable String regionOldName) {
+      this.regionOldName = regionOldName;
+   }
+
    public boolean hasLink() {
       return link != null && link.getUrl() != null && !link.getUrl().isEmpty();
    }
@@ -48,6 +67,8 @@ public class RenamedObject implements Parcelable {
       oldName = in.readString();
       newName = in.readString();
       link = in.readParcelable(DetailsLink.class.getClassLoader());
+      regionNewName = in.readString();
+      regionOldName = in.readString();
    }
 
    @Override
@@ -56,6 +77,8 @@ public class RenamedObject implements Parcelable {
       dest.writeString(oldName);
       dest.writeString(newName);
       dest.writeParcelable(link, flags);
+      dest.writeString(regionNewName);
+      dest.writeString(regionOldName);
    }
 
    @Override

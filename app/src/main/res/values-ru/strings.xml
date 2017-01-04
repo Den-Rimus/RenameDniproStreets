@@ -37,6 +37,7 @@
 
     <!-- Detail screen resources -->
     <string name="details_screen_title">Детали</string>
+    <string name="details_region_caption">Район:</string>
     <string name="details_old_caption">Старое название:</string>
     <string name="details_new_caption">Новое название:</string>
     <string name="details_button_caption">Узнать больше</string>

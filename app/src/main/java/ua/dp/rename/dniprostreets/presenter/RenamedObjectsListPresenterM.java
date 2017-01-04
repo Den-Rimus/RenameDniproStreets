@@ -24,6 +24,7 @@ public class RenamedObjectsListPresenterM extends BasePresenter<RenamedObjectsLi
    @Inject RenamedObjectsRepo dataRepo;
 
    private String id;
+   private CityRegion cityRegion;
    private List<RenamedObject> dataSet;
 
    private SearchState searchState = SearchState.DATASET;
@@ -40,20 +41,23 @@ public class RenamedObjectsListPresenterM extends BasePresenter<RenamedObjectsLi
          dataSet = dataRepo.getAllRenamedObjects();
          getView().applyDataSet(dataSet);
       } else {
-         CityRegion region = dataRepo.getRegion(id);
-         if (region == null) {
+         cityRegion = dataRepo.getRegion(id);
+         if (cityRegion == null) {
             getView().showError("Error getting region by ID");
          } else {
-            dataSet = region.getObjects();
+            dataSet = cityRegion.getObjects();
             getView().applyDataSet(dataSet);
-            getView().setTitle(region.getOldAreaName());
+            getView().setTitle(cityRegion.getOldAreaName());
          }
       }
    }
 
    @SuppressWarnings("unused")
    public void onEventMainThread(final RenamedObjectClickedEvent event) {
-      getView().openDetails(event.getModel());
+      final RenamedObject renamedObject = event.getModel();
+      renamedObject.setRegionNewName(cityRegion.getNewAreaName());
+      renamedObject.setRegionOldName(cityRegion.getOldAreaName());
+      getView().openDetails(renamedObject);
    }
 
    public void searchRequested(final String query) {
