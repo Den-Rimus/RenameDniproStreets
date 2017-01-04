@@ -22,52 +22,50 @@ import ua.dp.rename.dniprostreets.presenter.DetailsPresenter;
 
 @Layout(R.layout.fragment_detail)
 public class DetailsFragment extends BaseFragmentM<DetailsPresenter.View, DetailsPresenter>
-        implements DetailsPresenter.View {
+      implements DetailsPresenter.View {
 
-    @Bind(R.id.oldName)
-    TextView oldName;
-    @Bind(R.id.newName)
-    TextView newName;
-    @Bind(R.id.details)
-    Button details;
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
+   @Bind(R.id.oldName) TextView oldName;
+   @Bind(R.id.newName) TextView newName;
+   @Bind(R.id.details) Button details;
+   @Bind(R.id.toolbar) Toolbar toolbar;
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        //
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        initToolbar(toolbar);
-        //
-        presenter.onStart();
-    }
+   @Override
+   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+      super.onViewCreated(view, savedInstanceState);
 
-    @Override
-    public void syncUI(RenamedObject model) {
-        oldName.setText(model.getOldName());
-        newName.setText(model.getNewName());
-        details.setVisibility(model.hasLink() ? View.VISIBLE : View.GONE);
-    }
+      ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+      initToolbar(toolbar);
 
-    @OnClick(R.id.details) void detailsClicked() {
-        presenter.detailsClicked();
-    }
+      presenter.onStart();
+   }
 
-    @Override
-    public void showDetails(String pageUrl) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(pageUrl)));
-    }
+   @Override
+   public void syncUI(RenamedObject model) {
+      oldName.setText(model.getOldName());
+      newName.setText(model.getNewName());
+      details.setVisibility(model.hasLink() ? View.VISIBLE : View.GONE);
+   }
 
-    @SuppressLint("PrivateResource")
-    private void initToolbar(Toolbar toolbar) {
-        toolbar.setNavigationIcon(R.drawable.back_icon);
-        toolbar.setNavigationOnClickListener(view -> getActivity().onBackPressed());
-        toolbar.setTitle(R.string.details_screen_title);
-    }
+   @OnClick(R.id.details)
+   void detailsClicked() {
+      presenter.detailsClicked();
+   }
 
-    @Override @NonNull
-    public DetailsPresenter createPresenter() {
-        return new DetailsPresenter((RenamedObject) getArgs());
-    }
+   @Override
+   public void showDetails(String pageUrl) {
+      startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(pageUrl)));
+   }
+
+   @SuppressLint("PrivateResource")
+   private void initToolbar(Toolbar toolbar) {
+      toolbar.setNavigationIcon(R.drawable.back_icon);
+      toolbar.setNavigationOnClickListener(view -> getActivity().onBackPressed());
+      toolbar.setTitle(R.string.details_screen_title);
+   }
+
+   @Override
+   @NonNull
+   public DetailsPresenter createPresenter() {
+      return new DetailsPresenter((RenamedObject) getArgs());
+   }
 }

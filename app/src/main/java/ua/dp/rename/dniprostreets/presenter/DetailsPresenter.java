@@ -7,31 +7,31 @@ import ua.dp.rename.dniprostreets.entity.RenamedObject;
 
 public class DetailsPresenter extends BasePresenter<DetailsPresenter.View> {
 
-    private RenamedObject model;
+   private RenamedObject model;
 
-    public DetailsPresenter(RenamedObject model) {
-        this.model = model;
-    }
+   public DetailsPresenter(RenamedObject model) {
+      this.model = model;
+   }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        getView().syncUI(model);
-    }
+   @Override
+   public void onStart() {
+      super.onStart();
+      getView().syncUI(model);
+   }
 
-    public void detailsClicked() {
-        if (!model.hasLink()) return; // for safety
-        //
-        String url = model.getLink().getUrl();
-        if (!url.startsWith("http://") && !url.startsWith("https://")) url = "http://" + url;
-        //
-        getView().showDetails(url);
-    }
+   public void detailsClicked() {
+      if (!model.hasLink()) return; // for safety
 
-    public interface View extends MvpView {
+      String url = model.getLink().getUrl();
+      if (!url.startsWith("http://") && !url.startsWith("https://")) url = "http://" + url;
 
-        void syncUI(RenamedObject model);
+      getView().showDetails(url);
+   }
 
-        void showDetails(String pageUrl);
-    }
+   public interface View extends MvpView {
+
+      void syncUI(RenamedObject model);
+
+      void showDetails(String pageUrl);
+   }
 }
