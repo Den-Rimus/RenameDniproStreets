@@ -37,133 +37,132 @@ import ua.dp.rename.dniprostreets.view.DividerItemDecoration;
 
 @Layout(R.layout.fragment_renamed_objects_list)
 public class RenamedObjectsListFragmentM
-        extends BaseFragmentM<RenamedObjectsListPresenterM.View, RenamedObjectsListPresenterM>
-        implements RenamedObjectsListPresenterM.View {
+      extends BaseFragmentM<RenamedObjectsListPresenterM.View, RenamedObjectsListPresenterM>
+      implements RenamedObjectsListPresenterM.View {
 
-    private static final int DEBOUNCE_INTERVAL_LENGTH = 600;
+   private static final int DEBOUNCE_INTERVAL_LENGTH = 600;
 
-    @Bind(R.id.recyclerView)
-    RecyclerView recyclerView;
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-    SearchView searchView;
-    private boolean expandForGlobalSearch;
-    //
-    private RenamedObjectsAdapter adapter;
-    //
-    private Subscription searchViewSubscription;
+   @Bind(R.id.recyclerView) RecyclerView recyclerView;
+   @Bind(R.id.toolbar) Toolbar toolbar;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
+   SearchView searchView;
+   private boolean expandForGlobalSearch;
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ((App) getActivity().getApplication()).component().inject(this.presenter);
-        //
-        expandForGlobalSearch = ((RenamedObjectsListBundle) getArgs()).isGlobalSearch();
-        //
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        initToolbar(toolbar);
-        //
-        adapter = new RenamedObjectsAdapter(getActivity());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
-        recyclerView.setAdapter(adapter);
-        //
-        presenter.onStart();
-    }
+   private RenamedObjectsAdapter adapter;
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (searchViewSubscription != null && searchViewSubscription.isUnsubscribed())
-            subscribeSearch(searchView);
-    }
+   private Subscription searchViewSubscription;
 
-    @Override
-    public void onPause() {
-        if (searchViewSubscription != null) searchViewSubscription.unsubscribe();
-        super.onPause();
-    }
+   @Override
+   public void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      setHasOptionsMenu(true);
+   }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.fragment_renamed_objects_menu, menu);
-        initSearch(menu.findItem(R.id.action_search));
-    }
+   @Override
+   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+      super.onViewCreated(view, savedInstanceState);
+      ((App) getActivity().getApplication()).component().inject(this.presenter);
 
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        if (expandForGlobalSearch) searchView.setIconified(false);
-    }
+      expandForGlobalSearch = ((RenamedObjectsListBundle) getArgs()).isGlobalSearch();
 
-    @SuppressLint("PrivateResource")
-    private void initToolbar(Toolbar toolbar) {
-        toolbar.setNavigationIcon(R.drawable.back_icon);
-        toolbar.setNavigationOnClickListener(view -> getActivity().onBackPressed());
-    }
+      ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+      initToolbar(toolbar);
 
-    private void initSearch(MenuItem menuItem) {
-        searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-        searchView.setMaxWidth(Integer.MAX_VALUE);
-        searchView.setOnCloseListener(() -> {
-            tryHideSoftInput();
-            return false;
-        });
-        searchView.setQueryHint(getString(R.string.menu_item_search_hint));
-        searchView.setSubmitButtonEnabled(false);
-        searchView.setQuery(null, false);
-        //
-        subscribeSearch(searchView);
-    }
+      adapter = new RenamedObjectsAdapter(getActivity());
+      recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+      recyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
+      recyclerView.setAdapter(adapter);
 
-    private void subscribeSearch(SearchView searchView) {
-        searchViewSubscription = RxSearchView.queryTextChangeEvents(searchView)
-                .debounce(DEBOUNCE_INTERVAL_LENGTH, TimeUnit.MILLISECONDS)
-                .compose(new MainComposer<>())
-                .subscribe(this::onQueryTextChange, Throwable::printStackTrace);
-    }
+      presenter.onStart();
+   }
 
-    private void onQueryTextChange(SearchViewQueryTextEvent event) {
-        presenter.searchRequested(event.queryText().toString());
-    }
+   @Override
+   public void onResume() {
+      super.onResume();
+      if (searchViewSubscription != null && searchViewSubscription.isUnsubscribed())
+         subscribeSearch(searchView);
+   }
 
-    @Override
-    public void setTitle(String title) {
-        toolbar.setTitle(title);
-    }
+   @Override
+   public void onPause() {
+      if (searchViewSubscription != null) searchViewSubscription.unsubscribe();
+      super.onPause();
+   }
 
-    @Override
-    public void setTitle(@StringRes int titleResId) {
-        toolbar.setTitle(titleResId);
-    }
+   @Override
+   public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+      inflater.inflate(R.menu.fragment_renamed_objects_menu, menu);
+      initSearch(menu.findItem(R.id.action_search));
+   }
 
-    @Override
-    public void showError(String message) {
-        informUser(message);
-    }
+   @Override
+   public void onPrepareOptionsMenu(Menu menu) {
+      super.onPrepareOptionsMenu(menu);
+      if (expandForGlobalSearch) searchView.setIconified(false);
+   }
 
-    @Override
-    public void applyDataSet(List<RenamedObject> dataSet) {
-        adapter.setAll(dataSet);
-    }
+   @SuppressLint("PrivateResource")
+   private void initToolbar(Toolbar toolbar) {
+      toolbar.setNavigationIcon(R.drawable.back_icon);
+      toolbar.setNavigationOnClickListener(view -> getActivity().onBackPressed());
+   }
 
-    @Override
-    public void openDetails(RenamedObject model) {
-        getFragmentManager().beginTransaction().replace(R.id.main_container,
-                DetailsFragment.instantiate(getContext(),
-                        DetailsFragment.class.getName(), model))
-                .addToBackStack(DetailsFragment.class.getName())
-                .commit();
-    }
+   private void initSearch(MenuItem menuItem) {
+      searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+      searchView.setMaxWidth(Integer.MAX_VALUE);
+      searchView.setOnCloseListener(() -> {
+         tryHideSoftInput();
+         return false;
+      });
+      searchView.setQueryHint(getString(R.string.menu_item_search_hint));
+      searchView.setSubmitButtonEnabled(false);
+      searchView.setQuery(null, false);
 
-    @Override @NonNull
-    public RenamedObjectsListPresenterM createPresenter() {
-        return new RenamedObjectsListPresenterM(((RenamedObjectsListBundle) getArgs()).getId());
-    }
+      subscribeSearch(searchView);
+   }
+
+   private void subscribeSearch(SearchView searchView) {
+      searchViewSubscription = RxSearchView.queryTextChangeEvents(searchView)
+            .debounce(DEBOUNCE_INTERVAL_LENGTH, TimeUnit.MILLISECONDS)
+            .compose(new MainComposer<>())
+            .subscribe(this::onQueryTextChange, Throwable::printStackTrace);
+   }
+
+   private void onQueryTextChange(SearchViewQueryTextEvent event) {
+      presenter.searchRequested(event.queryText().toString());
+   }
+
+   @Override
+   public void setTitle(String title) {
+      toolbar.setTitle(title);
+   }
+
+   @Override
+   public void setTitle(@StringRes int titleResId) {
+      toolbar.setTitle(titleResId);
+   }
+
+   @Override
+   public void showError(String message) {
+      informUser(message);
+   }
+
+   @Override
+   public void applyDataSet(List<RenamedObject> dataSet) {
+      adapter.setAll(dataSet);
+   }
+
+   @Override
+   public void openDetails(RenamedObject model) {
+      getFragmentManager().beginTransaction().replace(R.id.main_container,
+            DetailsFragment.instantiate(getContext(), DetailsFragment.class.getName(), model))
+            .addToBackStack(DetailsFragment.class.getName())
+            .commit();
+   }
+
+   @Override
+   @NonNull
+   public RenamedObjectsListPresenterM createPresenter() {
+      return new RenamedObjectsListPresenterM(((RenamedObjectsListBundle) getArgs()).getId());
+   }
 }
