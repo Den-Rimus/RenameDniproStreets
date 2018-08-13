@@ -1,3 +1,6 @@
+## If you are looking at this code in context of hiring...
+... please note that this was written two years ago. I am working on re-doing this now to be a part of my portfolio.
+
 ## Що воно?
 
 [English README.md](https://github.com/Den-Rimus/RenameDniproStreets/wiki/English-README.md)
