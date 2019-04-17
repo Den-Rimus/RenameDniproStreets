@@ -2,12 +2,12 @@ package ua.dp.rename.dniprostreets.view.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import ua.dp.rename.dniprostreets.App;
 import ua.dp.rename.dniprostreets.R;
 import ua.dp.rename.dniprostreets.adapter.CityRegionsAdapter;
@@ -32,9 +32,9 @@ import ua.dp.rename.dniprostreets.view.DividerItemDecoration;
 public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.View, RegionsListPresenterM>
         implements RegionsListPresenterM.View {
 
-    @Bind(R.id.recyclerView) RecyclerView recyclerView;
-    @Bind(R.id.progressBar) ProgressBar progressBar;
-    @Bind(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.recyclerView) RecyclerView recyclerView;
+    @BindView(R.id.progressBar) ProgressBar progressBar;
+    @BindView(R.id.toolbar) Toolbar toolbar;
 
     private CityRegionsAdapter adapter;
 

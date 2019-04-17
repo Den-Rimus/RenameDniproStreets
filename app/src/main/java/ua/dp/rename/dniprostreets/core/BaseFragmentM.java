@@ -3,10 +3,10 @@ package ua.dp.rename.dniprostreets.core;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +16,14 @@ import com.hannesdorfmann.mosby.mvp.MvpFragment;
 import com.hannesdorfmann.mosby.mvp.MvpView;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public abstract class BaseFragmentM<V extends MvpView, P extends BasePresenter<V>>
         extends MvpFragment<V, P> {
 
     public static final String EXTRA_KEY = "BaseFragment_EXTRA";
+
+    private Unbinder unbinder;
 
     public static Fragment instantiate(Context context, String fname, Parcelable bundle) {
         Bundle args = new Bundle();
@@ -42,12 +45,12 @@ public abstract class BaseFragmentM<V extends MvpView, P extends BasePresenter<V
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
     }
 
     @Override
     public void onDestroyView() {
-        ButterKnife.unbind(this);
+        unbinder.unbind();
         super.onDestroyView();
     }
 

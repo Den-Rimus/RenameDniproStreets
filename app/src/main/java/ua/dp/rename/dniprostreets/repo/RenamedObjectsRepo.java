@@ -1,6 +1,6 @@
 package ua.dp.rename.dniprostreets.repo;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.innahema.collections.query.queriables.Queryable;
 
@@ -42,7 +42,10 @@ public class RenamedObjectsRepo {
                 .map(LastUpdateHolder::getLastUpdate)
                 .filter(this::updateNeeded)
                 .compose(new IoToMainComposer<>())
-                .subscribe(l -> performUpdate(), e -> pokeAttachedListenersWithError());
+                .subscribe(l -> performUpdate(), e -> {
+                    Timber.e(e, "API error");
+                    pokeAttachedListenersWithError();
+                });
     }
 
     public List<CityRegion> getRegionsAsList() {

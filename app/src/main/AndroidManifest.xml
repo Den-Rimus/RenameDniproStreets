@@ -8,15 +8,36 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
+        android:networkSecurityConfig="@xml/remote_data_source_network_config"
         android:name=".App"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".view.MainActivity">
+        <activity android:name="ua.dp.rename.dniprostreets.view.MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http"
+                      android:host="www.rename.dp.ua"
+                      android:pathPrefix="/"
+                        />
+
+                <data android:scheme="http"
+                      android:host="rename.dp.ua"
+                      android:pathPrefix="/"
+                        />
+
+                <data android:scheme="http" android:host="rename.dp.ua" />
+
+                <data android:scheme="http" android:host="rename.dp.ua" android:pathPrefix="/" />
             </intent-filter>
         </activity>
 

@@ -1,17 +1,17 @@
 package ua.dp.rename.dniprostreets.view;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import ua.dp.rename.dniprostreets.R;
 import ua.dp.rename.dniprostreets.util.RotationUtil;
 
 public class AboutActivity extends AppCompatActivity {
 
-    @Bind(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.toolbar) Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

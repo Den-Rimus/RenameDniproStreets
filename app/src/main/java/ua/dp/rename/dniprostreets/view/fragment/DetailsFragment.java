@@ -4,17 +4,17 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Locale;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 import ua.dp.rename.dniprostreets.R;
 import ua.dp.rename.dniprostreets.core.BaseFragmentM;
@@ -26,11 +26,11 @@ import ua.dp.rename.dniprostreets.presenter.DetailsPresenter;
 public class DetailsFragment extends BaseFragmentM<DetailsPresenter.View, DetailsPresenter>
       implements DetailsPresenter.View {
 
-   @Bind(R.id.oldName) TextView oldName;
-   @Bind(R.id.newName) TextView newName;
-   @Bind(R.id.details) Button details;
-   @Bind(R.id.toolbar) Toolbar toolbar;
-   @Bind(R.id.regionName) TextView regionNameCaption;
+   @BindView(R.id.oldName) TextView oldName;
+   @BindView(R.id.newName) TextView newName;
+   @BindView(R.id.details) Button details;
+   @BindView(R.id.toolbar) Toolbar toolbar;
+   @BindView(R.id.regionName) TextView regionNameCaption;
 
    @Override
    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

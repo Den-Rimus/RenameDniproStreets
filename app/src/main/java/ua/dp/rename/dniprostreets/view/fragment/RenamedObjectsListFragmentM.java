@@ -2,15 +2,15 @@ package ua.dp.rename.dniprostreets.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.core.view.MenuItemCompat;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,7 +22,7 @@ import com.jakewharton.rxbinding.support.v7.widget.SearchViewQueryTextEvent;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Subscription;
 import ua.dp.rename.dniprostreets.App;
 import ua.dp.rename.dniprostreets.R;
@@ -42,8 +42,8 @@ public class RenamedObjectsListFragmentM
 
    private static final int DEBOUNCE_INTERVAL_LENGTH = 600;
 
-   @Bind(R.id.recyclerView) RecyclerView recyclerView;
-   @Bind(R.id.toolbar) Toolbar toolbar;
+   @BindView(R.id.recyclerView) RecyclerView recyclerView;
+   @BindView(R.id.toolbar) Toolbar toolbar;
 
    SearchView searchView;
    private boolean expandForGlobalSearch;

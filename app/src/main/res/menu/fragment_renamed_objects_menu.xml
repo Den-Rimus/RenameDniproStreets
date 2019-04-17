@@ -9,7 +9,7 @@
         android:id="@+id/action_search"
         android:icon="@drawable/ic_menu_search"
         android:title="@string/menu_item_search_caption"
-        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always"
         android:showAsAction="always"
         />

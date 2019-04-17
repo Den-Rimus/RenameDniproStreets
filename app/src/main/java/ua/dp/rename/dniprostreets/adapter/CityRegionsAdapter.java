@@ -1,7 +1,7 @@
 package ua.dp.rename.dniprostreets.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 import ua.dp.rename.dniprostreets.R;
@@ -71,9 +71,9 @@ public class CityRegionsAdapter extends RecyclerView.Adapter<CityRegionsAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.rootView) View rootView;
-        @Bind(R.id.regionTextView) TextView regionName;
-        @Bind(R.id.regionFormerTextView) TextView regionFormerName;
+        @BindView(R.id.rootView) View rootView;
+        @BindView(R.id.regionTextView) TextView regionName;
+        @BindView(R.id.regionFormerTextView) TextView regionFormerName;
 
         public ViewHolder(View itemView) {
             super(itemView);

@@ -1,7 +1,7 @@
 package ua.dp.rename.dniprostreets.view;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import ua.dp.rename.dniprostreets.R;
 import ua.dp.rename.dniprostreets.util.RotationUtil;

@@ -1,6 +1,6 @@
 package ua.dp.rename.dniprostreets.entity;
 
-import android.support.annotation.StringRes;
+import androidx.annotation.StringRes;
 
 import ua.dp.rename.dniprostreets.R;
 

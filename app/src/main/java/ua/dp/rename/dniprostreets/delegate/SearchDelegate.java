@@ -1,6 +1,6 @@
 package ua.dp.rename.dniprostreets.delegate;
 
-import android.support.v7.widget.SearchView;
+import androidx.appcompat.widget.SearchView;
 
 import java.util.ArrayList;
 import java.util.Collection;
