@@ -16,30 +16,3 @@
 #   public *;
 #}
 
-
-# <retrolambda>
--dontwarn java.lang.invoke.*
-# </retrolambda>
-
-
-# <butterknife>
--keepnames class * { @butterknife.Bind *;}
--keep class butterknife.** { *; }
--dontwarn butterknife.internal.**
--keep class **$$ViewBinder { *; }
--keepclasseswithmembernames class * {
-    @butterknife.* <fields>;
-}
--keepclasseswithmembernames class * {
-    @butterknife.* <methods>;
-}
-# </butterknife>
-
-
-#<icepick>
--dontwarn icepick.**
--keep class **$$Icepick { *; }
--keepclasseswithmembernames class * {
-    @icepick.* <fields>;
-}
-#</icepick>
