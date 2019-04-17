@@ -66,7 +66,7 @@ public class RenamedObjectsListFragmentM
 
       ((App) getActivity().getApplication()).getAppComponent().inject(this.presenter);
 
-      expandForGlobalSearch = ((RenamedObjectsListBundle) getArgs()).isGlobalSearch();
+      expandForGlobalSearch = ((RenamedObjectsListBundle) getArgs()).getGlobalSearch();
 
       ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
       initToolbar(toolbar);
