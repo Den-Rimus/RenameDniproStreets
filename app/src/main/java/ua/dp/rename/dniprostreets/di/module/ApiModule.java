@@ -14,7 +14,8 @@ import ua.dp.rename.dniprostreets.api.RenamedObjectsService;
 @Module
 public class ApiModule {
 
-    @Provides @Singleton
+    @Provides
+    @Singleton
     RenamedObjectsService provideRenamedObjectsService(RestAdapter restAdapter) {
         return restAdapter.create(RenamedObjectsService.class);
     }

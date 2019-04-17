@@ -4,18 +4,16 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Locale;
 
-import butterknife.BindView;
-import butterknife.OnClick;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import ua.dp.rename.dniprostreets.R;
 import ua.dp.rename.dniprostreets.core.BaseFragmentM;
 import ua.dp.rename.dniprostreets.core.Layout;
@@ -26,15 +24,22 @@ import ua.dp.rename.dniprostreets.presenter.DetailsPresenter;
 public class DetailsFragment extends BaseFragmentM<DetailsPresenter.View, DetailsPresenter>
       implements DetailsPresenter.View {
 
-   @BindView(R.id.oldName) TextView oldName;
-   @BindView(R.id.newName) TextView newName;
-   @BindView(R.id.details) Button details;
-   @BindView(R.id.toolbar) Toolbar toolbar;
-   @BindView(R.id.regionName) TextView regionNameCaption;
+   private TextView oldName;
+   private TextView newName;
+   private Button details;
+   private Toolbar toolbar;
+   private TextView regionNameCaption;
 
    @Override
    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
+
+      oldName = view.findViewById(R.id.oldName);
+      newName = view.findViewById(R.id.newName);
+      details = view.findViewById(R.id.details);
+      toolbar = view.findViewById(R.id.toolbar);
+      regionNameCaption = view.findViewById(R.id.regionName);
+      details.setOnClickListener(v -> presenter.detailsClicked());
 
       ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
       initToolbar(toolbar);
@@ -56,11 +61,6 @@ public class DetailsFragment extends BaseFragmentM<DetailsPresenter.View, Detail
                model.getRegionOldName());
       }
       regionNameCaption.setText(regionName);
-   }
-
-   @OnClick(R.id.details)
-   void detailsClicked() {
-      presenter.detailsClicked();
    }
 
    @Override

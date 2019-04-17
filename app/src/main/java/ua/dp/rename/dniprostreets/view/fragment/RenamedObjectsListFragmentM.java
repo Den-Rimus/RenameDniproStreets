@@ -2,15 +2,6 @@ package ua.dp.rename.dniprostreets.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.core.view.MenuItemCompat;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,7 +13,15 @@ import com.jakewharton.rxbinding.support.v7.widget.SearchViewQueryTextEvent;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import butterknife.BindView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuItemCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import rx.Subscription;
 import ua.dp.rename.dniprostreets.App;
 import ua.dp.rename.dniprostreets.R;
@@ -42,8 +41,8 @@ public class RenamedObjectsListFragmentM
 
    private static final int DEBOUNCE_INTERVAL_LENGTH = 600;
 
-   @BindView(R.id.recyclerView) RecyclerView recyclerView;
-   @BindView(R.id.toolbar) Toolbar toolbar;
+   private RecyclerView recyclerView;
+   private Toolbar toolbar;
 
    SearchView searchView;
    private boolean expandForGlobalSearch;
@@ -61,7 +60,11 @@ public class RenamedObjectsListFragmentM
    @Override
    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
-      ((App) getActivity().getApplication()).component().inject(this.presenter);
+
+      recyclerView = view.findViewById(R.id.recyclerView);
+      toolbar = view.findViewById(R.id.toolbar);
+
+      ((App) getActivity().getApplication()).getAppComponent().inject(this.presenter);
 
       expandForGlobalSearch = ((RenamedObjectsListBundle) getArgs()).isGlobalSearch();
 

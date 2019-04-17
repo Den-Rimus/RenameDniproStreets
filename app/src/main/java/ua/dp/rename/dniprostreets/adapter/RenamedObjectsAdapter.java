@@ -1,7 +1,6 @@
 package ua.dp.rename.dniprostreets.adapter;
 
 import android.content.Context;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import androidx.recyclerview.widget.RecyclerView;
 import de.greenrobot.event.EventBus;
 import ua.dp.rename.dniprostreets.R;
 import ua.dp.rename.dniprostreets.entity.RenamedObject;
@@ -63,17 +61,21 @@ public class RenamedObjectsAdapter extends RecyclerView.Adapter<RenamedObjectsAd
         return dataSet.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.rootView) View rootView;
-        @BindView(R.id.typeTextView) TextView type;
-        @BindView(R.id.renamedTextView) TextView newName;
-        @BindView(R.id.formerTextView) TextView oldName;
+        View rootView;
+        TextView type;
+        TextView newName;
+        TextView oldName;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
-            //
+
+            rootView = itemView.findViewById(R.id.rootView);
+            type = itemView.findViewById(R.id.typeTextView);
+            newName = itemView.findViewById(R.id.renamedTextView);
+            oldName = itemView.findViewById(R.id.formerTextView);
+
             rootView.setOnClickListener(itemClickListener);
         }
     }

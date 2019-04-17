@@ -15,15 +15,10 @@ import android.view.inputmethod.InputMethodManager;
 import com.hannesdorfmann.mosby.mvp.MvpFragment;
 import com.hannesdorfmann.mosby.mvp.MvpView;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 public abstract class BaseFragmentM<V extends MvpView, P extends BasePresenter<V>>
         extends MvpFragment<V, P> {
 
     public static final String EXTRA_KEY = "BaseFragment_EXTRA";
-
-    private Unbinder unbinder;
 
     public static Fragment instantiate(Context context, String fname, Parcelable bundle) {
         Bundle args = new Bundle();
@@ -40,18 +35,6 @@ public abstract class BaseFragmentM<V extends MvpView, P extends BasePresenter<V
         } else {
             throw new IllegalArgumentException("BaseFragment subclass should have Layout annotation");
         }
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        unbinder = ButterKnife.bind(this, view);
-    }
-
-    @Override
-    public void onDestroyView() {
-        unbinder.unbind();
-        super.onDestroyView();
     }
 
     /**

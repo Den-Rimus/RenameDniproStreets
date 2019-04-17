@@ -2,12 +2,6 @@ package ua.dp.rename.dniprostreets.view.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,7 +10,12 @@ import android.widget.ProgressBar;
 
 import java.util.List;
 
-import butterknife.BindView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import ua.dp.rename.dniprostreets.App;
 import ua.dp.rename.dniprostreets.R;
 import ua.dp.rename.dniprostreets.adapter.CityRegionsAdapter;
@@ -32,9 +31,9 @@ import ua.dp.rename.dniprostreets.view.DividerItemDecoration;
 public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.View, RegionsListPresenterM>
         implements RegionsListPresenterM.View {
 
-    @BindView(R.id.recyclerView) RecyclerView recyclerView;
-    @BindView(R.id.progressBar) ProgressBar progressBar;
-    @BindView(R.id.toolbar) Toolbar toolbar;
+    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
+    private Toolbar toolbar;
 
     private CityRegionsAdapter adapter;
 
@@ -47,7 +46,13 @@ public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.Vi
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((App) getActivity().getApplication()).component().inject(this.presenter);
+
+        recyclerView = view.findViewById(R.id.recyclerView);
+        progressBar = view.findViewById(R.id.progressBar);
+        toolbar = view.findViewById(R.id.toolbar);
+
+        ((App) getActivity().getApplication()).getAppComponent().inject(this.presenter);
+
         toolbar.setTitle(R.string.app_name);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
