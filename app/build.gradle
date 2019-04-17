@@ -12,9 +12,9 @@ repositories {
 
 // App version
 def versionMajor = 1
-def versionMinor = 0
-def versionPatch = 4
-def versionCodee = 5
+def versionMinor = 1
+def versionPatch = 0
+def versionCodee = 0
 
 android {
     compileSdkVersion 28
@@ -52,6 +52,10 @@ android {
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
+}
+
+androidExtensions {
+    experimental = true
 }
 
 dependencies {
