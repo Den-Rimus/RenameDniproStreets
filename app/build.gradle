@@ -26,7 +26,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 28
         versionCode versionCodee
-        versionName "${versionMajor}.${versionMinor}.${versionPatch} (${versionCodee})"
+        versionName "$versionMajor.$versionMinor.$versionPatch ($versionCodee)"
     }
 
     buildTypes {
@@ -63,6 +63,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    def lifecycle_version = "2.0.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+
     implementation 'android.arch.navigation:navigation-fragment:1.0.0'
 
     testImplementation 'junit:junit:4.12'
@@ -80,10 +84,10 @@ dependencies {
 
     implementation 'de.greenrobot:eventbus:2.4.0'
 
-    def mosbyVersion = "3.1.1"
-    implementation "com.hannesdorfmann.mosby3:mvp:$mosbyVersion"
-    implementation "com.hannesdorfmann.mosby3:viewstate:$mosbyVersion"
-    implementation "com.hannesdorfmann.mosby3:mvp-nullobject-presenter:$mosbyVersion"
+    def mosby_version = "3.1.1"
+    implementation "com.hannesdorfmann.mosby3:mvp:$mosby_version"
+    implementation "com.hannesdorfmann.mosby3:viewstate:$mosby_version"
+    implementation "com.hannesdorfmann.mosby3:mvp-nullobject-presenter:$mosby_version"
 
     implementation 'com.snappydb:snappydb-lib:0.5.2'
     implementation 'com.esotericsoftware.kryo:kryo:2.24.0'
