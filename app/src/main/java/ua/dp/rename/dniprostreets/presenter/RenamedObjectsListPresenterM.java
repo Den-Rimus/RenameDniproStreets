@@ -3,7 +3,7 @@ package ua.dp.rename.dniprostreets.presenter;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import com.hannesdorfmann.mosby.mvp.MvpView;
+import com.hannesdorfmann.mosby3.mvp.MvpView;
 
 import java.util.List;
 
@@ -55,8 +55,10 @@ public class RenamedObjectsListPresenterM extends BasePresenter<RenamedObjectsLi
    @SuppressWarnings("unused")
    public void onEventMainThread(final RenamedObjectClickedEvent event) {
       final RenamedObject renamedObject = event.getModel();
-      renamedObject.setRegionNewName(cityRegion.getNewAreaName());
-      renamedObject.setRegionOldName(cityRegion.getOldAreaName());
+      if (cityRegion != null) {
+         renamedObject.setRegionNewName(cityRegion.getNewAreaName());
+         renamedObject.setRegionOldName(cityRegion.getOldAreaName());
+      }
       getView().openDetails(renamedObject);
    }
 

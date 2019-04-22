@@ -1,8 +1,8 @@
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 repositories {
     google()
@@ -14,7 +14,7 @@ repositories {
 def versionMajor = 1
 def versionMinor = 1
 def versionPatch = 0
-def versionCodee = 6
+def versionCodee = 6 // incremental
 
 android {
     compileSdkVersion 28
@@ -79,8 +79,10 @@ dependencies {
 
     implementation 'de.greenrobot:eventbus:2.4.0'
 
-    implementation 'com.hannesdorfmann.mosby:mvp:2.0.0'
-    implementation 'com.hannesdorfmann.mosby:viewstate:2.0.0'
+    def mosbyVersion = "3.1.1"
+    implementation "com.hannesdorfmann.mosby3:mvp:$mosbyVersion"
+    implementation "com.hannesdorfmann.mosby3:viewstate:$mosbyVersion"
+    implementation "com.hannesdorfmann.mosby3:mvp-nullobject-presenter:$mosbyVersion"
 
     implementation 'com.snappydb:snappydb-lib:0.5.2'
     implementation 'com.esotericsoftware.kryo:kryo:2.24.0'

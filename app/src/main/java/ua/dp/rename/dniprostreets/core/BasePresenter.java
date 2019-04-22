@@ -1,7 +1,7 @@
 package ua.dp.rename.dniprostreets.core;
 
-import com.hannesdorfmann.mosby.mvp.MvpNullObjectBasePresenter;
-import com.hannesdorfmann.mosby.mvp.MvpView;
+import com.hannesdorfmann.mosby3.mvp.MvpNullObjectBasePresenter;
+import com.hannesdorfmann.mosby3.mvp.MvpView;
 
 import de.greenrobot.event.EventBus;
 import ua.dp.rename.dniprostreets.event.DontGiveAFuckEvent;
