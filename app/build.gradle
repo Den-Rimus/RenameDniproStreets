@@ -78,8 +78,6 @@ dependencies {
     implementation 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.3.0'
     implementation 'com.github.techery:job-executor:0.1.1'
 
-    implementation 'com.innahema:collections-query:0.2.9'
-
     implementation 'de.greenrobot:eventbus:2.4.0'
 
     def mosbyVersion = "3.1.1"

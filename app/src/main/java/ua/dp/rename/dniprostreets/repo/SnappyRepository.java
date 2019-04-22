@@ -25,7 +25,7 @@ public class SnappyRepository {
     private static final String CITY_REGION = "CITY_REGION";
     private static final String CACHE_VERSION_KEY = "CACHE_VERSION_KEY";
 
-    static final int CACHE_VERSION = 2;
+    static final int CACHE_VERSION = 3;
 
     private Context context;
     private ExecutorService executorService;

@@ -97,7 +97,7 @@ class RenamedObjectsRepoImpl(
    private fun dataSetObtained(cityData: ApiDataHolder) {
       asList.apply {
          clear()
-         addAll(cityData.regionsAsList)
+         addAll(cityData.getRegionsAsList())
       }
       asMap.apply {
          clear()

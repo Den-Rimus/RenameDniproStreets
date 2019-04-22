@@ -8,7 +8,7 @@ class SnappyInitializer(
 ) : ComponentInitializer {
 
    override fun init() {
-      SnappyMigrator(db).tryMigration()
+      SnappyMigrator(db!!).checkAndTryMigrate()
       db = null
    }
 }
