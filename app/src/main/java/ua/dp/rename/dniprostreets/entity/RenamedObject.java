@@ -3,11 +3,8 @@ package ua.dp.rename.dniprostreets.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.annotation.Nullable;
-
 import com.esotericsoftware.kryo.DefaultSerializer;
 import com.esotericsoftware.kryo.serializers.CompatibleFieldSerializer;
-
-import java.util.Comparator;
 
 @DefaultSerializer(CompatibleFieldSerializer.class)
 public class RenamedObject implements Parcelable {
@@ -19,6 +16,7 @@ public class RenamedObject implements Parcelable {
    private String regionNewName;
    private String regionOldName;
 
+   // needed for Snappy
    public RenamedObject() {
    }
 
@@ -101,9 +99,6 @@ public class RenamedObject implements Parcelable {
    ///////////////////////////////////////////////////////////////////////////
    // Sorting and stuff
    ///////////////////////////////////////////////////////////////////////////
-
-   public static Comparator<RenamedObject> ALPHABETICAL_COMPARATOR = (lhs, rhs) ->
-         lhs.getNewName().compareToIgnoreCase(rhs.getNewName());
 
    @Override
    public boolean equals(Object o) {
