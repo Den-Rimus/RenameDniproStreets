@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.navigation.Navigation;
 import com.jakewharton.rxbinding.support.v7.widget.RxSearchView;
 import com.jakewharton.rxbinding.support.v7.widget.SearchViewQueryTextEvent;
 
@@ -157,10 +158,8 @@ public class RenamedObjectsListFragmentM
 
    @Override
    public void openDetails(RenamedObject model) {
-      getFragmentManager().beginTransaction().replace(R.id.main_container,
-            DetailsFragment.instantiate(getContext(), DetailsFragment.class.getName(), model))
-            .addToBackStack(DetailsFragment.class.getName())
-            .commit();
+      Navigation.findNavController(getView())
+            .navigate(R.id.action_navigate_to_renamed_details, prepareBundle(model));
    }
 
    @Override

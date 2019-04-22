@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import ua.dp.rename.dniprostreets.App;
@@ -33,7 +34,6 @@ public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.Vi
 
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
-    private Toolbar toolbar;
 
     private CityRegionsAdapter adapter;
 
@@ -49,10 +49,10 @@ public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.Vi
 
         recyclerView = view.findViewById(R.id.recyclerView);
         progressBar = view.findViewById(R.id.progressBar);
-        toolbar = view.findViewById(R.id.toolbar);
 
         ((App) getActivity().getApplication()).getAppComponent().inject(this.presenter);
 
+        final Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.app_name);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
@@ -66,11 +66,8 @@ public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.Vi
 
     @Override
     public void openRenamedObjectsList(RenamedObjectsListBundle args) {
-        getFragmentManager().beginTransaction().replace(R.id.main_container,
-                RenamedObjectsListFragmentM.instantiate(getContext(),
-                        RenamedObjectsListFragmentM.class.getName(), args))
-                .addToBackStack(RenamedObjectsListFragmentM.class.getName())
-                .commit();
+        Navigation.findNavController(getView())
+              .navigate(R.id.action_navigate_to_region_details, prepareBundle(args));
     }
 
     @Override

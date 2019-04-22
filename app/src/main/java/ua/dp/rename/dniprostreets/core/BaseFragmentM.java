@@ -19,10 +19,10 @@ public abstract class BaseFragmentM<V extends MvpView, P extends BasePresenter<V
 
     public static final String EXTRA_KEY = "BaseFragment_EXTRA";
 
-    public static Fragment instantiate(Context context, String fname, Parcelable bundle) {
+    public static Bundle prepareBundle(Parcelable data) {
         Bundle args = new Bundle();
-        args.putParcelable(EXTRA_KEY, bundle);
-        return instantiate(context, fname, args);
+        args.putParcelable(EXTRA_KEY, data);
+        return args;
     }
 
     @Nullable
