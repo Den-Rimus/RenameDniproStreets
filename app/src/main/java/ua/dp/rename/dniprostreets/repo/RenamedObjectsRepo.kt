@@ -1,12 +1,14 @@
 package ua.dp.rename.dniprostreets.repo
 
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import ua.dp.rename.dniprostreets.api.RenamedObjectsService
 import ua.dp.rename.dniprostreets.entity.ApiDataHolder
 import ua.dp.rename.dniprostreets.entity.CityRegion
 import ua.dp.rename.dniprostreets.entity.LastUpdateHolder
 import ua.dp.rename.dniprostreets.entity.RenamedObject
-import ua.dp.rename.dniprostreets.rx.IoToMainComposer
+import ua.dp.rename.dniprostreets.rx.mapSafeResponse
 
 interface RenamedObjectsRepo {
 
@@ -45,10 +47,12 @@ class RenamedObjectsRepoImpl(
    }
 
    override fun requestUpdate() {
-      apiService.lastDataUpdateTimestamp
-            .map(LastUpdateHolder::getLastUpdate)
+      apiService.getLastDataUpdateTimestamp()
+            .mapSafeResponse()
+            .map(LastUpdateHolder::lastUpdate)
             .filter(this::updateNeeded)
-            .compose(IoToMainComposer())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ performUpdate() }, {
                Timber.e(it, "API error")
                pokeAttachedListenersWithError()
@@ -86,8 +90,10 @@ class RenamedObjectsRepoImpl(
    }
 
    private fun performUpdate() {
-      apiService.json
-            .compose(IoToMainComposer())
+      apiService.getJson()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .mapSafeResponse()
             .subscribe({ dataSetObtained(it) }, { e ->
                pokeAttachedListenersWithError()
                Timber.e(e, "API error")

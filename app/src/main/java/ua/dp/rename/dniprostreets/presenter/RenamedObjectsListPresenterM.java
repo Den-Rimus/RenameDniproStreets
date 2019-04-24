@@ -2,14 +2,8 @@ package ua.dp.rename.dniprostreets.presenter;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-
 import com.hannesdorfmann.mosby3.mvp.MvpView;
-
-import java.util.List;
-
-import javax.inject.Inject;
-
-import rx.Observable;
+import io.reactivex.Observable;
 import timber.log.Timber;
 import ua.dp.rename.dniprostreets.R;
 import ua.dp.rename.dniprostreets.core.BasePresenter;
@@ -17,7 +11,9 @@ import ua.dp.rename.dniprostreets.entity.CityRegion;
 import ua.dp.rename.dniprostreets.entity.RenamedObject;
 import ua.dp.rename.dniprostreets.event.RenamedObjectClickedEvent;
 import ua.dp.rename.dniprostreets.repo.RenamedObjectsRepo;
-import ua.dp.rename.dniprostreets.rx.MainComposer;
+
+import javax.inject.Inject;
+import java.util.List;
 
 public class RenamedObjectsListPresenterM extends BasePresenter<RenamedObjectsListPresenterM.View> {
 
@@ -69,12 +65,11 @@ public class RenamedObjectsListPresenterM extends BasePresenter<RenamedObjectsLi
          return;
       }
       if (!query.isEmpty()) {
-         Observable.from(dataSet)
+         Observable.fromIterable(dataSet)
                .filter(renamedObject ->
                      matchesSearch(renamedObject.getNewName(), query)
                            || matchesSearch(renamedObject.getOldName(), query))
                .toList()
-               .compose(new MainComposer<>())
                .subscribe(getView()::applyDataSet,
                      e -> {
                         Timber.e(e, "Error applying search results!");

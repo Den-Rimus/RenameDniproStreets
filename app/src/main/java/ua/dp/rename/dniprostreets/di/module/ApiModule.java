@@ -1,39 +1,41 @@
 package ua.dp.rename.dniprostreets.di.module;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
-import retrofit.RestAdapter;
-import retrofit.converter.GsonConverter;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import ua.dp.rename.dniprostreets.api.LowercaseEnumTypeAdapterFactory;
 import ua.dp.rename.dniprostreets.api.RenamedObjectsService;
+
+import javax.inject.Singleton;
 
 @Module
 public class ApiModule {
 
-    @Provides
-    @Singleton
-    RenamedObjectsService provideRenamedObjectsService(RestAdapter restAdapter) {
-        return restAdapter.create(RenamedObjectsService.class);
-    }
+   @Provides
+   @Singleton
+   RenamedObjectsService provideRenamedObjectsService(Retrofit retrofit) {
+      return retrofit.create(RenamedObjectsService.class);
+   }
 
-    @Provides
-    RestAdapter provideRestAdapter(GsonConverter gsonConverter) {
-        return new RestAdapter.Builder()
-                .setEndpoint("http://rename.dp.ua")
-                .setLogLevel(RestAdapter.LogLevel.NONE)
-                .setConverter(gsonConverter)
-                .build();
-    }
+   @Provides
+   Retrofit provideRestAdapter(GsonConverterFactory gsonConverterFactory) {
+      return new Retrofit.Builder()
+            .baseUrl("http://rename.dp.ua/")
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(gsonConverterFactory)
+            .build();
+   }
 
-    @Provides
-    GsonConverter provideGsonConverter() {
-        return new GsonConverter(new GsonBuilder()
-                .serializeNulls()
-                .registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory("unknown"))
-                .create());
-    }
+   @Provides
+   GsonConverterFactory provideGsonConverterFactory() {
+      final Gson gson = new GsonBuilder()
+            .serializeNulls()
+            .registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory("unknown"))
+            .create();
+      return GsonConverterFactory.create(gson);
+   }
 }

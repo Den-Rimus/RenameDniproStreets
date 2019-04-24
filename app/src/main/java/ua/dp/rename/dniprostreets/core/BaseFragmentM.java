@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.fragment.app.Fragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.hannesdorfmann.mosby3.mvp.MvpFragment;
 import com.hannesdorfmann.mosby3.mvp.MvpView;
+import io.reactivex.disposables.CompositeDisposable;
 
 public abstract class BaseFragmentM<V extends MvpView, P extends BasePresenter<V>>
         extends MvpFragment<V, P> {

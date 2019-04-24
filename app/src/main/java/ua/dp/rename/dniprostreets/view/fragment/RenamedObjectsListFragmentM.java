@@ -8,8 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.navigation.Navigation;
-import com.jakewharton.rxbinding.support.v7.widget.RxSearchView;
-import com.jakewharton.rxbinding.support.v7.widget.SearchViewQueryTextEvent;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -23,7 +21,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import rx.Subscription;
+import com.jakewharton.rxbinding3.appcompat.RxSearchView;
+import com.jakewharton.rxbinding3.appcompat.SearchViewQueryTextEvent;
+import io.reactivex.disposables.Disposable;
 import ua.dp.rename.dniprostreets.App;
 import ua.dp.rename.dniprostreets.R;
 import ua.dp.rename.dniprostreets.adapter.RenamedObjectsAdapter;
@@ -32,7 +32,6 @@ import ua.dp.rename.dniprostreets.core.BaseFragmentM;
 import ua.dp.rename.dniprostreets.core.Layout;
 import ua.dp.rename.dniprostreets.entity.RenamedObject;
 import ua.dp.rename.dniprostreets.presenter.RenamedObjectsListPresenterM;
-import ua.dp.rename.dniprostreets.rx.MainComposer;
 import ua.dp.rename.dniprostreets.view.DividerItemDecoration;
 
 @Layout(R.layout.fragment_renamed_objects_list)
@@ -50,7 +49,7 @@ public class RenamedObjectsListFragmentM
 
    private RenamedObjectsAdapter adapter;
 
-   private Subscription searchViewSubscription;
+   private Disposable searchViewDisposable;
 
    @Override
    public void onCreate(Bundle savedInstanceState) {
@@ -83,13 +82,13 @@ public class RenamedObjectsListFragmentM
    @Override
    public void onResume() {
       super.onResume();
-      if (searchViewSubscription != null && searchViewSubscription.isUnsubscribed())
+      if (searchViewDisposable != null && searchViewDisposable.isDisposed())
          subscribeSearch(searchView);
    }
 
    @Override
    public void onPause() {
-      if (searchViewSubscription != null) searchViewSubscription.unsubscribe();
+      if (searchViewDisposable != null) searchViewDisposable.dispose();
       super.onPause();
    }
 
@@ -126,14 +125,13 @@ public class RenamedObjectsListFragmentM
    }
 
    private void subscribeSearch(SearchView searchView) {
-      searchViewSubscription = RxSearchView.queryTextChangeEvents(searchView)
+      searchViewDisposable = RxSearchView.queryTextChangeEvents(searchView)
             .debounce(DEBOUNCE_INTERVAL_LENGTH, TimeUnit.MILLISECONDS)
-            .compose(new MainComposer<>())
             .subscribe(this::onQueryTextChange, Throwable::printStackTrace);
    }
 
    private void onQueryTextChange(SearchViewQueryTextEvent event) {
-      presenter.searchRequested(event.queryText().toString());
+      presenter.searchRequested(event.getQueryText().toString());
    }
 
    @Override

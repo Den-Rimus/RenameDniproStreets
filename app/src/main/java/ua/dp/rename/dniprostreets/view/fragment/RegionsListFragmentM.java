@@ -73,9 +73,9 @@ public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.Vi
     @Override
     public void onDataSetObtained(List<CityRegion> dataSet) {
         if (dataSet == null || dataSet.isEmpty()) return;
-        progressBar.setVisibility(android.view.View.GONE);
+        progressBar.setVisibility(View.GONE);
         adapter.setAll(dataSet);
-        recyclerView.setVisibility(android.view.View.VISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.Vi
     @Override
     public void showError() {
         informUser(R.string.general_error_snack_caption);
-        progressBar.setVisibility(android.view.View.GONE);
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override @NonNull
