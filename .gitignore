@@ -11,6 +11,7 @@
 # Generated files
 bin/
 gen/
+app/release/*.json
 
 # Gradle files
 .gradle/
