@@ -8,7 +8,6 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 repositories {
     google()
     jcenter()
-    maven { url "https://jitpack.io" }
 }
 
 // App version
@@ -80,7 +79,6 @@ dependencies {
     implementation 'io.reactivex:rxjava:1.0.15'
     implementation 'io.reactivex:rxandroid:1.0.1'
     implementation 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.3.0'
-    implementation 'com.github.techery:job-executor:0.1.1'
 
     implementation 'de.greenrobot:eventbus:2.4.0'
 
