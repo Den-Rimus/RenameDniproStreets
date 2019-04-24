@@ -56,7 +56,7 @@ public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.Vi
         toolbar.setTitle(R.string.app_name);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
-        adapter = new CityRegionsAdapter(getActivity());
+        adapter = new CityRegionsAdapter(getString(R.string.region_former_name_caption));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
         recyclerView.setAdapter(adapter);

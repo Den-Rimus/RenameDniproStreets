@@ -1,38 +1,33 @@
 package ua.dp.rename.dniprostreets.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import androidx.recyclerview.widget.RecyclerView;
 import de.greenrobot.event.EventBus;
 import ua.dp.rename.dniprostreets.R;
 import ua.dp.rename.dniprostreets.entity.CityRegion;
 import ua.dp.rename.dniprostreets.event.CityRegionClickedEvent;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 public class CityRegionsAdapter extends RecyclerView.Adapter<CityRegionsAdapter.ViewHolder> {
 
-    private String formerNameCaptionFormat;
+    private String formerCaptionFormat;
 
     private List<CityRegion> dataSet;
 
     private View.OnClickListener itemClickListener;
 
-    public CityRegionsAdapter(Context context) {
-        this(context, new ArrayList<>());
-    }
+    public CityRegionsAdapter(String formerCaptionFormat) {
+        this.formerCaptionFormat = formerCaptionFormat;
 
-    public CityRegionsAdapter(Context context, List<CityRegion> dataSet) {
-        this.dataSet = dataSet;
-        formerNameCaptionFormat = context.getString(R.string.region_former_name_caption);
+        dataSet = new ArrayList<>();
         itemClickListener = v -> EventBus.getDefault().post(
-                new CityRegionClickedEvent((CityRegion) v.getTag(R.id.recycler_view_item_tag)));
+              new CityRegionClickedEvent((CityRegion) v.getTag(R.id.recycler_view_item_tag)));
     }
 
     public void setAll(Collection<CityRegion> dataSet) {
@@ -57,7 +52,7 @@ public class CityRegionsAdapter extends RecyclerView.Adapter<CityRegionsAdapter.
             holder.regionFormerName.setText("");
             holder.regionFormerName.setVisibility(View.INVISIBLE);
         } else {
-            holder.regionFormerName.setText(String.format(formerNameCaptionFormat, item.getOldAreaName()));
+            holder.regionFormerName.setText(String.format(formerCaptionFormat, item.getOldAreaName()));
             holder.regionFormerName.setVisibility(View.VISIBLE);
         }
     }
