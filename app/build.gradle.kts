@@ -1,9 +1,9 @@
 
 plugins {
     id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-android-extensions")
-    id("kotlin-kapt")
+    kotlin("android")
+    kotlin("android.extensions")
+    kotlin("kapt")
     id("androidx.navigation.safeargs.kotlin")
 }
 
@@ -13,38 +13,37 @@ repositories {
 }
 
 // App version
-def versionMajor = 1
-def versionMinor = 1
-def versionPatch = 0
-def versionCodee = 6 // incremental
+val versionMajor = 1
+val versionMinor = 1
+val versionPatch = 0
+val versionCodee = 6 // incremental
 
 android {
     compileSdkVersion(28)
-    buildToolsVersion("28.0.3")
 
     defaultConfig {
-        applicationId("ua.dp.rename.dniprostreets")
+        applicationId = "ua.dp.rename.dniprostreets"
         minSdkVersion(15)
         targetSdkVersion(28)
-        versionCode(versionCodee)
-        versionName("$versionMajor.$versionMinor.$versionPatch ($versionCodee)")
+        versionCode = versionCodee
+        versionName = "$versionMajor.$versionMinor.$versionPatch ($versionCodee)"
     }
 
     buildTypes {
-        debug {
-            applicationIdSuffix(".dev")
-            versionNameSuffix("-dev")
+        getByName("debug") {
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
         }
 
-        release {
-            minifyEnabled(false)
+        getByName("release") {
+            isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
 
     compileOptions {
-        sourceCompatibility(JavaVersion.VERSION_1_8)
-        targetCompatibility(JavaVersion.VERSION_1_8)
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     lintOptions {
@@ -57,30 +56,29 @@ android {
 }
 
 androidExtensions {
-    experimental = true
+    isExperimental = true
 }
 
 dependencies {
-    implementation(fileTree(dir: "libs", include: ["*.jar"]))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version")
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}")
 
-    def lifecycle_version = "2.0.0"
-    implementation("androidx.lifecycle:lifecycle-extensions:$lifecycle_version")
-    implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycle_version")
+    val lifecycleVersion = "2.0.0"
+    implementation("androidx.lifecycle:lifecycle-extensions:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion")
 
     implementation("android.arch.navigation:navigation-fragment:1.0.0")
 
-//    testImplementation "junit:junit:4.12"
     implementation("androidx.appcompat:appcompat:1.0.2")
     implementation("com.google.android.material:material:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.0.0")
 
     implementation("com.google.code.gson:gson:2.8.5")
 
-    def retrofit_version = "2.5.0"
-    implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
-    implementation("com.squareup.retrofit2:converter-gson:$retrofit_version")
-    implementation("com.squareup.retrofit2:adapter-rxjava2:$retrofit_version")
+    val retrofitVersion = "2.5.0"
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation("com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion")
 
     implementation("io.reactivex.rxjava2:rxjava:2.2.8")
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
@@ -88,15 +86,15 @@ dependencies {
 
     implementation("de.greenrobot:eventbus:2.4.0")
 
-    def mosby_version = "3.1.1"
-    implementation("com.hannesdorfmann.mosby3:mvp:$mosby_version")
-    implementation("com.hannesdorfmann.mosby3:viewstate:$mosby_version")
-    implementation("com.hannesdorfmann.mosby3:mvp-nullobject-presenter:$mosby_version")
+    val mosbyVersion = "3.1.1"
+    implementation("com.hannesdorfmann.mosby3:mvp:$mosbyVersion")
+    implementation("com.hannesdorfmann.mosby3:viewstate:$mosbyVersion")
+    implementation("com.hannesdorfmann.mosby3:mvp-nullobject-presenter:$mosbyVersion")
 
     implementation("com.snappydb:snappydb-lib:0.5.2")
     implementation("com.esotericsoftware.kryo:kryo:2.24.0")
 
-    def daggerVersion = "2.17"
+    val daggerVersion = "2.17"
     implementation("com.google.dagger:dagger:$daggerVersion")
     implementation("com.google.dagger:dagger-android:$daggerVersion")
     implementation("com.google.dagger:dagger-android-support:$daggerVersion")

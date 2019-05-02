@@ -1,6 +1,5 @@
 
 buildscript {
-    ext.kotlin_version = "1.3.31"
     repositories {
         google()
         jcenter()
@@ -9,7 +8,7 @@ buildscript {
 
     dependencies {
         classpath("com.android.tools.build:gradle:3.4.0")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.0.0")
     }
 }
@@ -21,6 +20,8 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
-    delete(rootProject.buildDir)
+tasks {
+    registering(Delete::class) {
+        delete(buildDir)
+    }
 }
