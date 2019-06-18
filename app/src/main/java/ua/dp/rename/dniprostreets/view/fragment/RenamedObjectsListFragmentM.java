@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.jakewharton.rxbinding3.appcompat.RxSearchView;
 import com.jakewharton.rxbinding3.appcompat.SearchViewQueryTextEvent;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import ua.dp.rename.dniprostreets.App;
 import ua.dp.rename.dniprostreets.R;
@@ -127,6 +128,7 @@ public class RenamedObjectsListFragmentM
    private void subscribeSearch(SearchView searchView) {
       searchViewDisposable = RxSearchView.queryTextChangeEvents(searchView)
             .debounce(DEBOUNCE_INTERVAL_LENGTH, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe(this::onQueryTextChange, Throwable::printStackTrace);
    }
 
