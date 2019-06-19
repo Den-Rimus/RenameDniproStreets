@@ -9,6 +9,7 @@ import ua.dp.rename.dniprostreets.entity.CityRegion
 import ua.dp.rename.dniprostreets.entity.LastUpdateHolder
 import ua.dp.rename.dniprostreets.entity.RenamedObject
 import ua.dp.rename.dniprostreets.rx.mapSafeResponse
+import javax.inject.Inject
 
 interface RenamedObjectsRepo {
 
@@ -32,7 +33,7 @@ interface RenamedObjectsRepo {
    fun detachListener(listener: Listener)
 }
 
-class RenamedObjectsRepoImpl(
+class RenamedObjectsRepoImpl @Inject constructor(
       private val db: SnappyRepository,
       private val apiService: RenamedObjectsService
 ) : RenamedObjectsRepo {

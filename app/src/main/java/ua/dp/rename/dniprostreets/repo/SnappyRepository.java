@@ -17,7 +17,10 @@ import java.util.concurrent.Future;
 
 import timber.log.Timber;
 import ua.dp.rename.dniprostreets.core.snappy_core.Optional;
+import ua.dp.rename.dniprostreets.di.AppContext;
 import ua.dp.rename.dniprostreets.entity.CityRegion;
+
+import javax.inject.Inject;
 
 public class SnappyRepository {
 
@@ -30,7 +33,8 @@ public class SnappyRepository {
     private Context context;
     private ExecutorService executorService;
 
-    public SnappyRepository(Context context) {
+    @Inject
+    public SnappyRepository(@AppContext Context context) {
         if (context == null) throw new IllegalArgumentException("Context is null");
         //
         this.context = context;

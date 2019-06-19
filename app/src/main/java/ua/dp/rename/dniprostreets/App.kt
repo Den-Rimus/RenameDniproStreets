@@ -21,14 +21,11 @@ class App : Application() {
 
         component = DaggerAppComponent.builder()
                 .appModule(AppModule(this))
-                .apiModule(ApiModule())
-                .renamedObjectsRepoModule(RenamedObjectsRepoModule())
-                .componentsInitializerModule(ComponentsInitializerModule())
                 .build()
 
         component.inject(this)
 
-        initializers.forEach{ it.init() }
+        initializers.forEach { initializer -> initializer.init() }
     }
 
     val appComponent: AppComponent

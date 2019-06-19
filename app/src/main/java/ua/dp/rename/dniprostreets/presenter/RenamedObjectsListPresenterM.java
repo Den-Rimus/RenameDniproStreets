@@ -17,7 +17,8 @@ import java.util.List;
 
 public class RenamedObjectsListPresenterM extends BasePresenter<RenamedObjectsListPresenterM.View> {
 
-   @Inject RenamedObjectsRepo dataRepo;
+   @Inject
+   RenamedObjectsRepo dataRepo;
 
    private String id;
    private CityRegion cityRegion;

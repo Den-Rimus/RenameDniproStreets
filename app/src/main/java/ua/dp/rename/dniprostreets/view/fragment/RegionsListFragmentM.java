@@ -23,6 +23,7 @@ import ua.dp.rename.dniprostreets.adapter.CityRegionsAdapter;
 import ua.dp.rename.dniprostreets.bundle.RenamedObjectsListBundle;
 import ua.dp.rename.dniprostreets.core.BaseFragmentM;
 import ua.dp.rename.dniprostreets.core.Layout;
+import ua.dp.rename.dniprostreets.di.component.DaggerRegionsListComponent;
 import ua.dp.rename.dniprostreets.entity.CityRegion;
 import ua.dp.rename.dniprostreets.presenter.RegionsListPresenterM;
 import ua.dp.rename.dniprostreets.view.AboutActivity;
@@ -50,7 +51,9 @@ public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.Vi
         recyclerView = view.findViewById(R.id.recyclerView);
         progressBar = view.findViewById(R.id.progressBar);
 
-        ((App) getActivity().getApplication()).getAppComponent().inject(this.presenter);
+        DaggerRegionsListComponent.builder()
+              .appComponent(((App) getActivity().getApplication()).getAppComponent())
+              .build().inject(presenter);
 
         final Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.app_name);

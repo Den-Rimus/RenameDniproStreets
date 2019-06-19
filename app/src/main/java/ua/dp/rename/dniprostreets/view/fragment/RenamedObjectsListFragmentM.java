@@ -31,6 +31,7 @@ import ua.dp.rename.dniprostreets.adapter.RenamedObjectsAdapter;
 import ua.dp.rename.dniprostreets.bundle.RenamedObjectsListBundle;
 import ua.dp.rename.dniprostreets.core.BaseFragmentM;
 import ua.dp.rename.dniprostreets.core.Layout;
+import ua.dp.rename.dniprostreets.di.component.DaggerRegionDetailComponent;
 import ua.dp.rename.dniprostreets.entity.RenamedObject;
 import ua.dp.rename.dniprostreets.presenter.RenamedObjectsListPresenterM;
 import ua.dp.rename.dniprostreets.view.DividerItemDecoration;
@@ -65,7 +66,9 @@ public class RenamedObjectsListFragmentM
       recyclerView = view.findViewById(R.id.recyclerView);
       toolbar = view.findViewById(R.id.toolbar);
 
-      ((App) getActivity().getApplication()).getAppComponent().inject(this.presenter);
+      DaggerRegionDetailComponent.builder()
+            .appComponent(((App) getActivity().getApplication()).getAppComponent())
+            .build().inject(presenter);
 
       expandForGlobalSearch = ((RenamedObjectsListBundle) getArgs()).getGlobalSearch();
 
