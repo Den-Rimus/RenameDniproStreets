@@ -80,7 +80,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
     implementation("com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion")
 
-    implementation("io.reactivex.rxjava2:rxjava:2.2.8")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.9")
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
     implementation("com.jakewharton.rxbinding3:rxbinding-appcompat:3.0.0-alpha2")
 
