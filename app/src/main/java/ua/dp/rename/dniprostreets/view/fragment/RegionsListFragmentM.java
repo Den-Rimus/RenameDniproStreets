@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import kotlin.Unit;
 import ua.dp.rename.dniprostreets.App;
 import ua.dp.rename.dniprostreets.R;
 import ua.dp.rename.dniprostreets.adapter.CityRegionsAdapter;
@@ -59,12 +60,18 @@ public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.Vi
         toolbar.setTitle(R.string.app_name);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
-        adapter = new CityRegionsAdapter(getString(R.string.region_former_name_caption));
+        adapter = new CityRegionsAdapter(this::onItemClick);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
         recyclerView.setAdapter(adapter);
 
         presenter.onStart();
+    }
+
+    private Unit onItemClick(CityRegion item) {
+        presenter.onItemClicked(item);
+
+        return Unit.INSTANCE;
     }
 
     @Override

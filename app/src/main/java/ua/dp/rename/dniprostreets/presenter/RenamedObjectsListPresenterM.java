@@ -9,7 +9,6 @@ import ua.dp.rename.dniprostreets.R;
 import ua.dp.rename.dniprostreets.core.BasePresenter;
 import ua.dp.rename.dniprostreets.entity.CityRegion;
 import ua.dp.rename.dniprostreets.entity.RenamedObject;
-import ua.dp.rename.dniprostreets.event.RenamedObjectClickedEvent;
 import ua.dp.rename.dniprostreets.repo.RenamedObjectsRepo;
 
 import javax.inject.Inject;
@@ -49,14 +48,12 @@ public class RenamedObjectsListPresenterM extends BasePresenter<RenamedObjectsLi
       }
    }
 
-   @SuppressWarnings("unused")
-   public void onEventMainThread(final RenamedObjectClickedEvent event) {
-      final RenamedObject renamedObject = event.getModel();
+   public void onItemClicked(RenamedObject item) {
       if (cityRegion != null) {
-         renamedObject.setRegionNewName(cityRegion.getNewAreaName());
-         renamedObject.setRegionOldName(cityRegion.getOldAreaName());
+         item.setRegionNewName(cityRegion.getNewAreaName());
+         item.setRegionOldName(cityRegion.getOldAreaName());
       }
-      getView().openDetails(renamedObject);
+      getView().openDetails(item);
    }
 
    public void searchRequested(final String query) {

@@ -6,12 +6,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-
-import androidx.navigation.Navigation;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -19,12 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.jakewharton.rxbinding3.appcompat.RxSearchView;
 import com.jakewharton.rxbinding3.appcompat.SearchViewQueryTextEvent;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import kotlin.Unit;
 import ua.dp.rename.dniprostreets.App;
 import ua.dp.rename.dniprostreets.R;
 import ua.dp.rename.dniprostreets.adapter.RenamedObjectsAdapter;
@@ -35,6 +31,9 @@ import ua.dp.rename.dniprostreets.di.component.DaggerRegionDetailComponent;
 import ua.dp.rename.dniprostreets.entity.RenamedObject;
 import ua.dp.rename.dniprostreets.presenter.RenamedObjectsListPresenterM;
 import ua.dp.rename.dniprostreets.view.DividerItemDecoration;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Layout(R.layout.fragment_renamed_objects_list)
 public class RenamedObjectsListFragmentM
@@ -75,12 +74,18 @@ public class RenamedObjectsListFragmentM
       ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
       initToolbar(toolbar);
 
-      adapter = new RenamedObjectsAdapter(getActivity());
+      adapter = new RenamedObjectsAdapter(this::onItemClicked);
       recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
       recyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
       recyclerView.setAdapter(adapter);
 
       presenter.onStart();
+   }
+
+   private Unit onItemClicked(RenamedObject item) {
+      presenter.onItemClicked(item);
+
+      return Unit.INSTANCE;
    }
 
    @Override

@@ -1,16 +1,13 @@
 package ua.dp.rename.dniprostreets.presenter;
 
 import com.hannesdorfmann.mosby3.mvp.MvpView;
-
-import java.util.List;
-
-import javax.inject.Inject;
-
 import ua.dp.rename.dniprostreets.bundle.RenamedObjectsListBundle;
 import ua.dp.rename.dniprostreets.core.BasePresenter;
 import ua.dp.rename.dniprostreets.entity.CityRegion;
-import ua.dp.rename.dniprostreets.event.CityRegionClickedEvent;
 import ua.dp.rename.dniprostreets.repo.RenamedObjectsRepo;
+
+import javax.inject.Inject;
+import java.util.List;
 
 public class RegionsListPresenterM extends BasePresenter<RegionsListPresenterM.View>
         implements RenamedObjectsRepo.Listener {
@@ -36,9 +33,8 @@ public class RegionsListPresenterM extends BasePresenter<RegionsListPresenterM.V
         getView().showError();
     }
 
-    @SuppressWarnings("unused")
-    public void onEventMainThread(final CityRegionClickedEvent event) {
-        getView().openRenamedObjectsList(new RenamedObjectsListBundle(event.cityRegion.getId()));
+    public void onItemClicked(CityRegion item) {
+        getView().openRenamedObjectsList(new RenamedObjectsListBundle(item.getId()));
     }
 
     public void openGlobalSearch() {

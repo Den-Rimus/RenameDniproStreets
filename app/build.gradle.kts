@@ -84,8 +84,6 @@ dependencies {
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
     implementation("com.jakewharton.rxbinding3:rxbinding-appcompat:3.0.0-alpha2")
 
-    implementation("de.greenrobot:eventbus:2.4.0")
-
     val mosbyVersion = "3.1.1"
     implementation("com.hannesdorfmann.mosby3:mvp:$mosbyVersion")
     implementation("com.hannesdorfmann.mosby3:viewstate:$mosbyVersion")
