@@ -50,8 +50,13 @@ public class RenamedObjectsListPresenterM extends BasePresenter<RenamedObjectsLi
 
    public void onItemClicked(RenamedObject item) {
       if (cityRegion != null) {
-         item.setRegionNewName(cityRegion.getNewAreaName());
-         item.setRegionOldName(cityRegion.getOldAreaName());
+         item = item.copy(
+               item.getType(),
+               item.getOldName(),
+               item.getNewName(),
+               item.getLink(),
+               cityRegion.getNewAreaName(),
+               cityRegion.getOldAreaName());
       }
       getView().openDetails(item);
    }

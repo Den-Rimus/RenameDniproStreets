@@ -20,20 +20,22 @@ class RenamedObjectsRepoImpl @Inject constructor(
    private val asList = mutableListOf<CityRegion>()
 
    init {
-      asList.addAll(db.cityRegions)
+//      asList.addAll(db.cityRegions)
    }
 
    override fun requestUpdate() {
-      apiService.getLastDataUpdateTimestamp()
-            .mapSafeResponse()
-            .map(LastUpdateHolder::lastUpdate)
-            .filter(this::updateNeeded)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ performUpdate() }, {
-               Timber.e(it, "API error")
-               pokeAttachedListenersWithError()
-            })
+      // Temporary commented: force update every time until persistent storage re-done
+//      apiService.getLastDataUpdateTimestamp()
+//            .mapSafeResponse()
+//            .map(LastUpdateHolder::lastUpdate)
+//            .filter(this::updateNeeded)
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe({ performUpdate() }, {
+//               Timber.e(it, "API error")
+//               pokeAttachedListenersWithError()
+//            })
+      performUpdate()
    }
 
    override fun getRegionsAsList(): List<CityRegion> {
@@ -48,10 +50,10 @@ class RenamedObjectsRepoImpl @Inject constructor(
       val superSet = mutableListOf<RenamedObject>()
       asList.forEach { region ->
          superSet.addAll(region.objects.map {
-            it.apply {
-               regionOldName = region.oldAreaName
-               regionNewName = region.newAreaName
-            }
+            it.copy(
+                  regionOldName = region.oldAreaName,
+                  regionNewName = region.newAreaName
+            )
          })
       }
       superSet.sortWith(ALPHABETICAL_COMPARATOR)
@@ -83,8 +85,8 @@ class RenamedObjectsRepoImpl @Inject constructor(
          addAll(cityData.getRegionsAsList())
       }
       pokeAttachedListenersWithSuccess()
-      db.putCityRegions(asList)
-      db.lastUpdateTimestamp = System.currentTimeMillis()
+//      db.putCityRegions(asList)
+//      db.lastUpdateTimestamp = System.currentTimeMillis()
    }
 
    override fun attachListener(listener: RenamedObjectsRepo.Listener) {

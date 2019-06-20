@@ -1,7 +1,6 @@
 package ua.dp.rename.dniprostreets.presenter;
 
 import com.hannesdorfmann.mosby3.mvp.MvpView;
-
 import ua.dp.rename.dniprostreets.core.BasePresenter;
 import ua.dp.rename.dniprostreets.entity.RenamedObject;
 

@@ -12,15 +12,15 @@ data class ApiDataHolder(
 ) {
 
    fun getRegionsAsList(): List<CityRegion> {
-      r61.id = "r61"
-      r62.id = "r62"
-      r63.id = "r63"
-      r64.id = "r64"
-      r65.id = "r65"
-      r66.id = "r66"
-      r67.id = "r67"
-      r68.id = "r68"
-
-      return listOf(r61, r62, r63, r64, r65, r66, r67, r68)
+      return listOf(
+            r61.copy(id = "r61"),
+            r62.copy(id = "r62"),
+            r63.copy(id = "r63"),
+            r64.copy(id = "r64"),
+            r65.copy(id = "r65"),
+            r66.copy(id = "r66"),
+            r67.copy(id = "r67"),
+            r68.copy(id = "r68")
+      )
    }
 }
