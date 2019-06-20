@@ -9,17 +9,17 @@ import ua.dp.rename.dniprostreets.core.SnappyInitializer
 import ua.dp.rename.dniprostreets.repo.SnappyRepository
 
 @Module
-class ComponentsInitializerModule {
+open class ComponentsInitializerModule {
 
     @Provides
     @IntoSet
-    fun provideSnappyInitializer(snappyRepository: SnappyRepository): ComponentInitializer {
+    open fun provideSnappyInitializer(snappyRepository: SnappyRepository): ComponentInitializer {
         return SnappyInitializer(snappyRepository)
     }
 
     @Provides
     @IntoSet
-    fun provideLogInitializer(): ComponentInitializer {
+    open fun provideLogInitializer(): ComponentInitializer {
         return LogInitializer()
     }
 }
