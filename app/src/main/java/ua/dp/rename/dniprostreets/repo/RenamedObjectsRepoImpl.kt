@@ -38,7 +38,7 @@ class RenamedObjectsRepoImpl @Inject constructor(
       performUpdate()
    }
 
-   override fun getRegionsAsList(): List<CityRegion> {
+   override fun getRegions(): List<CityRegion> {
       return asList
    }
 

@@ -4,13 +4,10 @@ import android.app.Application
 import ua.dp.rename.dniprostreets.core.ComponentInitializer
 import ua.dp.rename.dniprostreets.di.component.AppComponent
 import ua.dp.rename.dniprostreets.di.component.DaggerAppComponent
-import ua.dp.rename.dniprostreets.di.module.ApiModule
 import ua.dp.rename.dniprostreets.di.module.AppModule
-import ua.dp.rename.dniprostreets.di.module.ComponentsInitializerModule
-import ua.dp.rename.dniprostreets.di.module.RenamedObjectsRepoModule
 import javax.inject.Inject
 
-class App : Application() {
+open class App : Application() {
 
     private lateinit var component: AppComponent
 
@@ -19,9 +16,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        component = DaggerAppComponent.builder()
-                .appModule(AppModule(this))
-                .build()
+        component = createComponent()
 
         component.inject(this)
 
@@ -30,4 +25,10 @@ class App : Application() {
 
     val appComponent: AppComponent
         get() = component
+
+    protected open fun createComponent(): AppComponent {
+        return DaggerAppComponent.builder()
+              .appModule(AppModule(this))
+              .build()
+    }
 }

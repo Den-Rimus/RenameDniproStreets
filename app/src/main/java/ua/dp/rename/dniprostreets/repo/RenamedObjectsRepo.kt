@@ -7,7 +7,7 @@ interface RenamedObjectsRepo {
 
    fun requestUpdate()
 
-   fun getRegionsAsList(): List<CityRegion>
+   fun getRegions(): List<CityRegion>
 
    fun getRegion(id: String): CityRegion?
 

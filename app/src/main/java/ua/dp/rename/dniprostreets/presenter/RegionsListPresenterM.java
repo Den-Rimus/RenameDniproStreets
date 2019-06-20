@@ -19,13 +19,13 @@ public class RegionsListPresenterM extends BasePresenter<RegionsListPresenterM.V
     public void onStart() {
         super.onStart();
         dataRepo.attachListener(this);
-        getView().onDataSetObtained(dataRepo.getRegionsAsList());
+        getView().onDataSetObtained(dataRepo.getRegions());
         dataRepo.requestUpdate();
     }
 
     @Override
     public void onDataUpdated() {
-        getView().onDataSetObtained(dataRepo.getRegionsAsList());
+        getView().onDataSetObtained(dataRepo.getRegions());
     }
 
     @Override
