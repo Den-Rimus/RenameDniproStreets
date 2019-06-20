@@ -27,6 +27,9 @@ android {
         targetSdkVersion(28)
         versionCode = versionCodee
         versionName = "$versionMajor.$versionMinor.$versionPatch ($versionCodee)"
+
+        testInstrumentationRunner = "ua.dp.rename.dniprostreets.MockAppRunner"
+//        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -103,4 +106,10 @@ dependencies {
     implementation("javax.annotation:jsr250-api:1.0")
 
     implementation("com.jakewharton.timber:timber:4.1.0")
+
+    // <UI_testing>
+    androidTestImplementation("androidx.test.ext:junit:1.1.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
+    androidTestImplementation("androidx.test.espresso:espresso-intents:3.2.0")
+    // </UI_testing>
 }
