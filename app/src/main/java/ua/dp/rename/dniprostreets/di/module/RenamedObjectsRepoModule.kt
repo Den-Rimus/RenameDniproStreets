@@ -1,15 +1,15 @@
 package ua.dp.rename.dniprostreets.di.module
 
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import ua.dp.rename.dniprostreets.repo.RenamedObjectsRepo
 import ua.dp.rename.dniprostreets.repo.RenamedObjectsRepoImpl
 import javax.inject.Singleton
 
 @Module
-interface RenamedObjectsRepoModule {
+open class RenamedObjectsRepoModule {
 
-   @Binds
+   @Provides
    @Singleton
-   fun provideRenamedRepo(impl: RenamedObjectsRepoImpl): RenamedObjectsRepo
+   open fun provideRenamedRepo(impl: RenamedObjectsRepoImpl): RenamedObjectsRepo = impl
 }
