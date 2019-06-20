@@ -40,11 +40,9 @@ class RenamedObjectsRepoImpl @Inject constructor(
 
    private val listeners = mutableListOf<RenamedObjectsRepo.Listener>()
    private val asList = mutableListOf<CityRegion>()
-   private val asMap = mutableMapOf<String, CityRegion>()
 
    init {
       asList.addAll(db.cityRegions)
-      asMap.putAll(ApiDataHolder.getRegionsAsMap(asList))
    }
 
    override fun requestUpdate() {
@@ -65,7 +63,7 @@ class RenamedObjectsRepoImpl @Inject constructor(
    }
 
    override fun getRegion(id: String): CityRegion? {
-      return asMap[id]
+      return asList.firstOrNull { it.id == id }
    }
 
    override fun getAllRenamedObjects(): List<RenamedObject> {
@@ -105,10 +103,6 @@ class RenamedObjectsRepoImpl @Inject constructor(
       asList.apply {
          clear()
          addAll(cityData.getRegionsAsList())
-      }
-      asMap.apply {
-         clear()
-         putAll(ApiDataHolder.getRegionsAsMap(asList))
       }
       pokeAttachedListenersWithSuccess()
       db.putCityRegions(asList)

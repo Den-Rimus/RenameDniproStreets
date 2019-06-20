@@ -23,13 +23,4 @@ data class ApiDataHolder(
 
       return listOf(r61, r62, r63, r64, r65, r66, r67, r68)
    }
-
-   companion object {
-
-      fun getRegionsAsMap(regions: List<CityRegion>): Map<String, CityRegion> {
-         val asMap = mutableMapOf<String, CityRegion>()
-         regions.forEach { asMap[it.id] = it }
-         return asMap
-      }
-   }
 }
