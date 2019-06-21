@@ -6,13 +6,21 @@
    android:layout_width="match_parent"
    android:layout_height="wrap_content"
    android:orientation="vertical"
-   android:padding="?attr/listPreferredItemPaddingLeft"
+   android:paddingLeft="@dimen/list_default_side_margin"
+   android:paddingStart="@dimen/list_default_side_margin"
+   android:paddingRight="@dimen/list_default_side_margin"
+   android:paddingEnd="@dimen/list_default_side_margin"
+   android:paddingTop="?attr/listPreferredItemPaddingLeft"
+   android:paddingBottom="?attr/listPreferredItemPaddingLeft"
+   android:clipToPadding="false"
+   android:background="@drawable/ripple_touchable"
    >
 
    <TextView
       android:id="@+id/typeTextView"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:textAppearance="?attr/textAppearanceSubtitle1"
       android:textSize="@dimen/sub_caption_text_size"
       tools:text="Озеро"
       />
@@ -21,6 +29,7 @@
       android:id="@+id/renamedTextView"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginTop="6dp"
       android:textAppearance="?attr/textAppearanceListItem"
       tools:text="Хортицька"
       />
@@ -29,6 +38,7 @@
       android:id="@+id/formerTextView"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginTop="6dp"
       android:textSize="@dimen/sub_caption_text_size"
       tools:text="Боженка"
       />

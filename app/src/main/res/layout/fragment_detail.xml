@@ -9,14 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fillViewport="true"
-        android:clipToPadding="false"
-        android:overScrollMode="ifContentScrolls"
-        android:scrollbars="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/list_default_side_margin"
-        android:paddingRight="@dimen/list_default_side_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
+        style="@style/VerticalListScroll"
         >
 
         <include layout="@layout/details_content" />

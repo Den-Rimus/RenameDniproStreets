@@ -17,9 +17,7 @@
         <item name="android:fillViewport">true</item>
         <item name="android:clipToPadding">false</item>
         <item name="android:overScrollMode">ifContentScrolls</item>
-        <item name="android:scrollbars">vertical</item>
-        <item name="android:paddingLeft">@dimen/list_default_side_margin</item>
-        <item name="android:paddingRight">@dimen/list_default_side_margin</item>
+        <item name="android:scrollbars">none</item>
     </style>
 
     <style name="VerticalListRecycler" parent="VerticalListScroll" />

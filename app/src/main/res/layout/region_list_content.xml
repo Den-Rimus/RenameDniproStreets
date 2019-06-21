@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
-   xmlns:android="http://schemas.android.com/apk/res/android"
-   android:layout_width="match_parent"
-   android:layout_height="match_parent"
-   android:orientation="vertical"
-   >
-
-   <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/recyclerView"
-      style="@style/VerticalListRecycler"
+      xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:paddingBottom="@dimen/activity_vertical_margin"
-      android:paddingTop="@dimen/activity_vertical_margin"
-      android:visibility="invisible"
+      >
+
+   <androidx.recyclerview.widget.RecyclerView
+         android:id="@+id/recyclerView"
+         style="@style/VerticalListRecycler"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:visibility="invisible"
          app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
          tools:listitem="@layout/item_region_cell"
          tools:visibility="visible"
