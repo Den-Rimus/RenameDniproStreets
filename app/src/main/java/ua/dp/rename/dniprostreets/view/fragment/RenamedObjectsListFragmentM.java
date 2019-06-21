@@ -14,6 +14,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.jakewharton.rxbinding3.appcompat.RxSearchView;
@@ -30,7 +31,6 @@ import ua.dp.rename.dniprostreets.core.Layout;
 import ua.dp.rename.dniprostreets.di.component.DaggerRegionDetailComponent;
 import ua.dp.rename.dniprostreets.entity.RenamedObject;
 import ua.dp.rename.dniprostreets.presenter.RenamedObjectsListPresenterM;
-import ua.dp.rename.dniprostreets.view.DividerItemDecoration;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -75,8 +75,7 @@ public class RenamedObjectsListFragmentM
       initToolbar(toolbar);
 
       adapter = new RenamedObjectsAdapter(this::onItemClicked);
-      recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-      recyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
+      recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
       recyclerView.setAdapter(adapter);
 
       presenter.onStart();

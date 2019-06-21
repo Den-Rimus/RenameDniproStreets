@@ -37,8 +37,8 @@ class RenamedObjectsAdapter(
             itemRootView.setOnClickListener { itemClickListener.invoke(item) }
 
             typeTextView.text = context.getString(item.type.captionResId)
-            renamedTextView.text = item.oldName
-            formerTextView.text = item.newName
+            renamedTextView.text = item.newName
+            formerTextView.text = item.oldName
          }
       }
    }

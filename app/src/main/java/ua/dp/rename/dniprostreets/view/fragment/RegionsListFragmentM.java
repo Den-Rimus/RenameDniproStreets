@@ -7,14 +7,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import kotlin.Unit;
@@ -28,7 +26,8 @@ import ua.dp.rename.dniprostreets.di.component.DaggerRegionsListComponent;
 import ua.dp.rename.dniprostreets.entity.CityRegion;
 import ua.dp.rename.dniprostreets.presenter.RegionsListPresenterM;
 import ua.dp.rename.dniprostreets.view.AboutActivity;
-import ua.dp.rename.dniprostreets.view.DividerItemDecoration;
+
+import java.util.List;
 
 @Layout(R.layout.fragment_regions_list)
 public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.View, RegionsListPresenterM>
@@ -61,8 +60,7 @@ public class RegionsListFragmentM extends BaseFragmentM<RegionsListPresenterM.Vi
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         adapter = new CityRegionsAdapter(this::onItemClick);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
 
         presenter.onStart();
