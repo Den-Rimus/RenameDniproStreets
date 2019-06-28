@@ -7,5 +7,7 @@
     <dimen name="shadow_size">5dp</dimen>
     <dimen name="button_drawable_padding">8dp</dimen>
 
+    <dimen name="about_side_margin">10dp</dimen>
+
     <item name="recycler_view_item_tag" type="id" />
 </resources>
